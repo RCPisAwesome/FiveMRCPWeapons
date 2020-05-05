@@ -1,0 +1,1270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Weapon Menu By RCPisAwesome</title>
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+	<script src="https://www.rcpisawesome.co.uk/dev/RCPMenu.js"></script>
+	<link href="https://www.rcpisawesome.co.uk/dev/RCPMenu.css" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet">
+	<script>
+		$(function() {
+			var location = window.location.href;
+			var directoryPath = location.substring(6, location.lastIndexOf("/")+1);
+			window.addEventListener('message', function(event) {
+				if (event.data.menuclick){
+					$("#tabdefault").click();
+				}
+				$("#weaponstats").css('display', event.data.showstats ? "block" : "none");
+				if (event.data.showstats){
+					var damage = event.data.damage;
+					var speed = event.data.speed;
+					var capacity = event.data.capacity;
+					var accuracy = event.data.accuracy;
+					var range = event.data.range;
+					var compdamage = event.data.compdamage;
+					var compspeed = event.data.compspeed;
+					var compcapacity = event.data.compcapacity;
+					var compaccuracy = event.data.compaccuracy;
+					var comprange = event.data.comprange;
+
+					var multiplier = 2;
+					var damagewidth = damage * multiplier;
+					var speedwidth = speed * multiplier;
+					var capacitywidth = capacity * multiplier;
+					var accuracywidth = accuracy * multiplier;
+					var rangewidth = range * multiplier;
+					var compdamagewidth = compdamage * multiplier;
+					var compspeedwidth = compspeed * multiplier;
+					var compcapacitywidth = compcapacity * multiplier;
+					var compaccuracywidth = compaccuracy * multiplier;
+					var comprangewidth = comprange * multiplier;
+
+					$("#damagevalue").text(damage);
+					$("#speedvalue").text(speed);
+					$("#capacityvalue").text(capacity);
+					$("#accuracyvalue").text(accuracy);
+					$("#rangevalue").text(range);
+
+					$("#compdamagevalue").text(compdamage);
+					$("#compspeedvalue").text(compspeed);
+					$("#compcapacityvalue").text(compcapacity);
+					$("#compaccuracyvalue").text(compaccuracy);
+					$("#comprangevalue").text(comprange);
+
+					$("#damage > .bottom").css("width",damagewidth);
+					$("#speed > .bottom").css("width",speedwidth);
+					$("#capacity > .bottom").css("width",capacitywidth);
+					$("#accuracy > .bottom").css("width",accuracywidth);
+					$("#range > .bottom").css("width",rangewidth);
+
+					$("#damage > .top").css("width",compdamagewidth);
+					$("#speed > .top").css("width",compspeedwidth);
+					$("#capacity > .top").css("width",compcapacitywidth);
+					$("#accuracy > .top").css("width",compaccuracywidth);
+					$("#range > .top").css("width",comprangewidth);
+
+					if ((compdamagewidth) >= 300){
+						$("#damage").css("width",(10+(compdamagewidth))+"px");
+					}else{
+						$("#damage").css("width","300px");
+					}
+					if ((compspeedwidth) >= 300){
+						$("#speed").css("width",(10+(compspeedwidth))+"px");
+					}else{
+						$("#speed").css("width","300px");
+					}
+					if ((compcapacitywidth) >= 300){
+						$("#capacity").css("width",(10+(compcapacitywidth))+"px");
+					}else{
+						$("#capacity").css("width","300px");
+					}
+					if ((compaccuracywidth) >= 300){
+						$("#accuracy").css("width",(10+(compaccuracywidth))+"px");
+					}else{
+						$("#accuracy").css("width","300px");
+					}
+					if ((comprangewidth) >= 300){
+						$("#range").css("width",(10+(comprangewidth))+"px");
+					}else{
+						$("#range").css("width","300px");
+					}
+
+					if (damage == compdamage){
+						$("#damage > .top").css("background-color","rgb(84,240,84)");
+						$("#damage > .bottom").css("background-color","rgb(84,240,84)");
+						$("#damage > .bottom").css("z-index","0");
+					}else if (damage < compdamage){
+						$("#damage > .top").css("background-color","#00ddff");
+						$("#damage > .bottom").css("background-color","rgb(84,240,84)");
+						$("#damage > .bottom").css("z-index","2");
+					}else{
+						$("#damage > .bottom").css("background-color","#f42323");
+						$("#damage > .top").css("background-color","rgb(84,240,84)");
+						$("#damage > .bottom").css("z-index","0");
+					}
+
+					if (speed == compspeed){
+						$("#speed > .top").css("background-color","rgb(84,240,84)");
+						$("#speed > .bottom").css("background-color","rgb(84,240,84)");
+						$("#speed > .bottom").css("z-index","0");
+					}else if (speed < compspeed){
+						$("#speed > .top").css("background-color","#00ddff");
+						$("#speed > .bottom").css("background-color","rgb(84,240,84)");
+						$("#speed > .bottom").css("z-index","2");
+					}else{
+						$("#speed > .bottom").css("background-color","#f42323");
+						$("#speed > .top").css("background-color","rgb(84,240,84)");
+						$("#speed > .bottom").css("z-index","0");
+					}
+
+					if (capacity == compcapacity){
+						$("#capacity > .top").css("background-color","rgb(84,240,84)");
+						$("#capacity > .bottom").css("background-color","rgb(84,240,84)");
+						$("#capacity > .bottom").css("z-index","0");
+					}else if (capacity < compcapacity){
+						$("#capacity > .top").css("background-color","#00ddff");
+						$("#capacity > .bottom").css("background-color","rgb(84,240,84)");
+						$("#capacity > .bottom").css("z-index","2");
+					}else{
+						$("#capacity > .bottom").css("background-color","#f42323");
+						$("#capacity > .top").css("background-color","rgb(84,240,84)");
+						$("#capacity > .bottom").css("z-index","0");
+					}
+
+					if (accuracy == compaccuracy){
+						$("#accuracy > .top").css("background-color","rgb(84,240,84)");
+						$("#accuracy > .bottom").css("background-color","rgb(84,240,84)");
+						$("#accuracy > .bottom").css("z-index","0");
+					}else if (accuracy < compaccuracy){
+						$("#accuracy > .top").css("background-color","#00ddff");
+						$("#accuracy > .bottom").css("background-color","rgb(84,240,84)");
+						$("#accuracy > .bottom").css("z-index","2");
+					}else{
+						$("#accuracy > .bottom").css("background-color","#f42323");
+						$("#accuracy > .top").css("background-color","rgb(84,240,84)");
+						$("#accuracy > .bottom").css("z-index","0");
+					}
+
+					if (range == comprange){
+						$("#range > .top").css("background-color","rgb(84,240,84)");
+						$("#range > .bottom").css("background-color","rgb(84,240,84)");
+						$("#range > .bottom").css("z-index","0");
+					}else if (range < comprange){
+						$("#range > .top").css("background-color","#00ddff");
+						$("#range > .bottom").css("background-color","rgb(84,240,84)");
+						$("#range > .bottom").css("z-index","2");
+					}else{
+						$("#range > .bottom").css("background-color","#f42323");
+						$("#range > .top").css("background-color","rgb(84,240,84)");
+						$("#range > .bottom").css("z-index","0");
+					}
+
+					$(".stat > .top").each(function() {
+						$(this).data("origWidth", $(this).width()).width(0).animate({width: $(this).data("origWidth")}, 800);
+					});
+					$(".stat > .bottom").each(function() {
+						$(this).data("origWidth", $(this).width()).width(0).animate({width: $(this).data("origWidth")}, 800);
+					});
+				}
+			});
+			$("button").click(function(){
+				if (this.id == "removeallweapons"){
+					$.post("http://"+directoryPath+"removeallweapons");
+				}else if (this.id == "removecurrentweapon"){
+					$.post("http://"+directoryPath+"removecurrentweapon");
+				}else if (this.id == "allweapons"){
+					$.post("http://"+directoryPath+"allweapons");
+				}else if (this.id == "maxammo"){
+					$.post("http://"+directoryPath+"maxammo");
+				}else if (this.id == "infinite"){
+					$.post("http://"+directoryPath+"infinite");
+				}else if (this.id == "infiniteinclip"){
+					$.post("http://"+directoryPath+"infiniteinclip");
+				}else if (this.id == "showimpacts"){
+					$.post("http://"+directoryPath+"showimpacts");
+				}else if (this.id == "showdamagedentities"){
+					$.post("http://"+directoryPath+"showdamagedentities");
+				}else if (this.id == "currentammo"){
+					$.post(("http://"+directoryPath+"currentammo"), JSON.stringify({
+						amount: $("#amount").val()
+					}));
+				}else if ($(this).hasClass("weapon")){
+					$(".component").css("display", "none");
+					$("#componenttab").css("display", "none");
+					$("#componenttab[name~="+this.id+"]").css("display", "inline");
+					$(".component[name~="+this.id+"]").css("display", "inline");
+					$.post(("http://"+directoryPath+"weapon"), JSON.stringify({
+						weapon: this.id,
+						text: $(this).html()
+					}));
+				}else if ($(this).hasClass("component")){
+					$.post(("http://"+directoryPath+"component"), JSON.stringify({
+						component: this.id,
+						text: $(this).html()
+					}));
+				}else{
+					$.post(("http://"+directoryPath+"ammo"), JSON.stringify({
+						weapon: $(this).attr("name"),
+						amount: $("#amount").val(),
+						text: $(this).html()
+					}));
+				} 
+				
+			});
+			$(".tabbutton").click(function(){
+				if (!(this.id == "componenttab")){
+					$("#componenttab").css("display", "none");
+				}
+			});
+		})
+	</script>
+	<style>
+		.weapon{
+			background-position: center;
+			background-size: cover;
+			background-repeat: no-repeat;
+		}
+		#menu{
+			height: 83%;
+		}
+		.tab{
+			height: 83%;
+		}
+		.tabbutton{
+			width: 33.33%;
+		}
+		#componenttab,.component{
+			display: none;
+		}
+		#weaponstats{
+			display: none;
+			position: absolute;
+			top: 42vw;
+			left: 3vw;
+			width: 18vw;
+			text-align: center;
+			font-family: gitan-latin,sans-serif;
+			font-weight: 800;
+			font-style: italic;
+			text-shadow:
+			0 0 4px black, 0 0 4px black, 0 0 4px black, 0 0 4px black, 0 0 4px black, 
+			0 0 4px black, 0 0 4px black, 0 0 4px black, 0 0 4px black, 0 0 4px black;
+			color: #E2B71B;
+			font-size: 1vw;
+		}
+
+		.stat {
+			margin: auto;
+			height: 20px;
+			width: 300px;
+			position: relative;
+			background: #555;
+			border-radius: 25px;
+			padding: 5px;
+			box-shadow: inset 0 -1px 1px rgba(255,255,255,0.3);
+		}
+		.stat > span {
+			display: block;
+			height: 20px;
+			border-top-left-radius: 20px;
+			border-bottom-left-radius: 20px;
+			box-shadow:
+			  inset 0 2px 9px  rgba(255,255,255,0.3),
+			  inset 0 -2px 6px rgba(0,0,0,0.4);
+			position: absolute;
+			overflow: hidden;
+		}
+		.stat > span:after, .animate > span > span {
+			content: "";
+			position: absolute;
+			height: 20px;
+			top: 0; left: 0; bottom: 0; right: 0;
+			background-image:
+			   -webkit-gradient(linear, 0 0, 100% 100%,
+			      color-stop(.25, rgba(255, 255, 255, .2)),
+			      color-stop(.25, transparent), color-stop(.5, transparent),
+			      color-stop(.5, rgba(255, 255, 255, .2)),
+			      color-stop(.75, rgba(255, 255, 255, .2)),
+			      color-stop(.75, transparent), to(transparent)
+			   );
+			background-size: 50px 50px;
+			-webkit-animation: move 2s linear infinite;
+			border-top-right-radius: 8px;
+			border-bottom-right-radius: 8px;
+			border-top-left-radius: 20px;
+			border-bottom-left-radius: 20px;
+			overflow: hidden;
+		}
+		.top{
+			z-index: 2;
+			width: 0px;
+		}
+		.bottom{
+			z-index: 1;
+			width: 0px;
+		}
+		p{
+			margin: 0 !important;
+		}
+	</style>
+</head>
+<body>
+	<div id="weaponstats">
+		<p>Damage:</p>
+		<p id="damagevalue">0</p>
+		<p>%</p>
+		<p>With Components:</p>
+		<p id="compdamagevalue">0</p>
+		<p>%</p>
+		<div id="damage" class="stat">
+			<span class="top"></span>
+			<span class="bottom"></span>
+		</div>
+		<p>Speed:</p>
+		<p id="speedvalue">0</p>
+		<p>%</p>
+		<p>With Components:</p>
+		<p id="compspeedvalue">0</p>
+		<p>%</p>
+		<div id="speed" class="stat">
+			<span class="top"></span>
+			<span class="bottom"></span>
+		</div>
+		<p>Capacity:</p>
+		<p id="capacityvalue">0</p>
+		<p>%</p>
+		<p>With Components:</p>
+		<p id="compcapacityvalue">0</p>
+		<p>%</p>
+		<div id="capacity" class="stat">
+			<span class="top"></span>
+			<span class="bottom"></span>
+		</div>
+		<p>Accuracy:</p>
+		<p id="accuracyvalue">0</p>
+		<p>%</p>
+		<p>With Components:</p>
+		<p id="compaccuracyvalue">0</p>
+		<p>%</p>
+		<div id="accuracy" class="stat">
+			<span class="top"></span>
+			<span class="bottom"></span>
+		</div>
+		<p>Range:</p>
+		<p id="rangevalue">0</p>
+		<p>%</p>
+		<p>With Components:</p>
+		<p id="comprangevalue">0</p>
+		<p>%</p>
+		<div id="range" class="stat">
+			<span class="top"></span>
+			<span class="bottom"></span>
+		</div>
+	</div>
+
+	<div id="menu">
+		<div id="titlebar">
+			<div id="close">X</div>
+			<label class="switch">
+				<input id="switch" type="checkbox" checked>
+				<span class="slider"></span>
+			</label>
+			<div id="title"></div>
+		</div>
+
+		<div id="tabdefault" class="tabbutton">Settings</div>
+		<div class="tabbutton">Melee</div>
+		<div class="tabbutton">Handguns</div>
+		<div class="tabbutton">Machine Guns</div>
+		<div class="tabbutton">Assault Rifles</div>
+		<div class="tabbutton">Sniper Rifles</div>
+		<div class="tabbutton">Shotguns</div>
+		<div class="tabbutton">Heavy Weapons</div>
+		<div class="tabbutton">Throwables</div>
+		<div class="tabbutton">Other</div>
+		<div class="tabbutton">Ammo</div>
+		<div id="componenttab" class="tabbutton" name="weapon_battleaxe weapon_bottle weapon_dagger weapon_hatchet weapon_knife weapon_knuckle weapon_machete weapon_stone_hatchet weapon_switchblade weapon_appistol weapon_combatpistol weapon_heavypistol weapon_pistol weapon_pistol50 weapon_snspistol weapon_vintagepistol weapon_revolver weapon_flaregun weapon_stungun weapon_marksmanpistol weapon_assaultsmg weapon_combatpdw weapon_machinepistol weapon_microsmg weapon_minismg weapon_smg weapon_combatmg weapon_gusenberg weapon_mg weapon_advancedrifle weapon_assaultrifle weapon_bullpuprifle weapon_carbinerifle weapon_compactrifle weapon_specialcarbine weapon_heavysniper weapon_marksmanrifle weapon_sniperrifle weapon_assaultshotgun weapon_bullpupshotgun weapon_dbshotgun weapon_heavyshotgun weapon_pumpshotgun weapon_sawnoffshotgun weapon_autoshotgun weapon_musket weapon_compactlauncher weapon_firework weapon_grenadelauncher weapon_hominglauncher weapon_minigun weapon_railgun weapon_rpg gadget_parachute weapon_raypistol weapon_raycarbine weapon_rayminigun weapon_pistol_mk2 weapon_snspistol_mk2 weapon_smg_mk2 weapon_combatmg_mk2 weapon_assaultrifle_mk2 weapon_bullpuprifle_mk2 weapon_carbinerifle_mk2 weapon_specialcarbine_mk2 weapon_heavysniper_mk2 weapon_marksmanrifle_mk2 weapon_pumpshotgun_mk2 weapon_revolver_mk2">Components</div>
+		
+		<div id="Settings" class="tab">
+			<div>
+				<button id="allweapons">Add All Weapons</button>
+				<button id="removeallweapons">Remove All Weapons</button>
+				<button id="removecurrentweapon">Remove Current Weapon</button>
+				<button id="maxammo">Give Max Ammo for All Weapons</button>
+				<button id="infinite">Toggle Infinite Ammo</button>
+				<button id="infiniteinclip">Toggle Infinite Ammo In Clip</button>
+				<button id="showimpacts">Toggle Bullet Impacts</button>
+				<button id="showdamagedentities">Toggle Shot Entities</button>
+			</div>
+		</div>
+		<div id="Ammo" class="tab">
+			<div>
+				<p>Ammo Amount to Add: </p><input  id="amount" type="number" min="0" value="100" step="1" oninput="validity.valid||(value='100');" placeholder="0">
+			</div>
+			<div>
+				<button id="currentammo">Current Weapon</button>
+				<p> (Also Will Add MK2 Special Ammos)</p>
+			</div>
+			<div>
+				<button name="weapon_pistol" class="ammo">Pistol</button>
+				<button name="weapon_smg" class="ammo">Sub Machine Gun</button>
+				<button name="weapon_assaultrifle" class="ammo">Assault Rifle</button>
+				<button name="weapon_sniperrifle" class="ammo">Sniper Rifle</button>
+				<button name="weapon_pumpshotgun" class="ammo">Shotgun</button>
+				<button name="weapon_mg" class="ammo">Machine Gun</button>
+				<button name="weapon_flaregun" class="ammo">Flare Gun</button>
+			</div>
+			<div>
+				<button name="weapon_firework" class="ammo">Firework Launcher</button>
+				<button name="weapon_grenadelauncher" class="ammo">Grenade Launcher</button>
+				<button name="weapon_hominglauncher" class="ammo">Homing Launcher</button>
+				<button name="weapon_minigun" class="ammo">Minigun</button>
+				<button name="weapon_railgun" class="ammo">Rail Gun</button>
+				<button name="weapon_rpg" class="ammo">RPG</button>
+			</div>
+			<div>
+				<button name="weapon_bzgas" class="ammo">Smoke Grenade (BZ Gas)</button>
+				<button name="weapon_fireextinguisher" class="ammo">Fire Extinguisher</button>
+				<button name="weapon_flare" class="ammo">Flare</button>
+				<button name="weapon_grenade" class="ammo">Grenade</button>
+				<button name="weapon_petrolcan" class="ammo">Petrol Can</button>
+				<button name="weapon_molotov" class="ammo">Molotov</button>
+				<button name="weapon_pipebomb" class="ammo">Pipe Bomb</button>
+				<button name="weapon_proxmine" class="ammo">Proximity Mine</button>
+				<button name="weapon_smokegrenade" class="ammo">Tear Gas</button>
+				<button name="weapon_snowball" class="ammo">Snowball</button>
+				<button name="weapon_stickybomb" class="ammo">Sticky Bomb</button>
+			</div>
+		</div>
+		<div id="Melee" class="tab">
+			<button id="weapon_bat" class="weapon">Baseball Bat</button>
+			<button id="weapon_battleaxe" class="weapon">Battle Axe</button>
+			<button id="weapon_bottle" class="weapon">Bottle</button>
+			<button id="weapon_crowbar" class="weapon">Crowbar</button>
+			<button id="weapon_dagger" class="weapon">Cavalry Dagger</button>
+			<button id="weapon_flashlight" class="weapon">Flashlight</button>
+			<button id="weapon_golfclub" class="weapon">Golf Club</button>
+			<button id="weapon_hammer" class="weapon">Hammer</button>
+			<button id="weapon_hatchet" class="weapon">Hatchet</button>
+			<button id="weapon_knife" class="weapon">Knife</button>
+			<button id="weapon_knuckle" class="weapon">Knuckle Duster</button>
+			<button id="weapon_machete" class="weapon">Machete</button>
+			<button id="weapon_nightstick" class="weapon">Nightstick</button>
+			<button id="weapon_poolcue" class="weapon">Pool Cue</button>
+			<button id="weapon_stone_hatchet" class="weapon">Stone Hatchet</button>
+			<button id="weapon_switchblade" class="weapon">Switchblade</button>
+			<button id="weapon_wrench" class="weapon">Pipe Wrench</button>
+			<button id="weapon_unarmed" class="weapon">Unarmed</button>
+			<style>
+				#weapon_bat{background-image: url("https://wiki.rage.mp/images/8/8b/Baseball-bat-icon.png")}
+				#weapon_battleaxe{background-image: url("https://wiki.rage.mp/images/3/3b/Battle-axe-icon.png")}
+				#weapon_bottle{background-image: url("https://wiki.rage.mp/images/5/5b/Broken-bottle-icon.png")}
+				#weapon_crowbar{background-image: url("https://wiki.rage.mp/images/8/8a/Crowbar-icon.png")}
+				#weapon_dagger{background-image: url("https://wiki.rage.mp/images/f/f5/Antique-cavalry-dagger-icon.png")}
+				#weapon_flashlight {background-image: url("https://wiki.rage.mp/images/8/85/Flashlight-icon.png")}
+				#weapon_golfclub{background-image: url("https://wiki.rage.mp/images/c/cb/Golf-club-icon.png")}
+				#weapon_hammer{background-image: url("https://wiki.rage.mp/images/e/ec/Hammer-icon.png")}
+				#weapon_hatchet{background-image: url("https://wiki.rage.mp/images/e/eb/Hatchet-icon.png")}
+				#weapon_knife{background-image: url("https://wiki.rage.mp/images/8/8c/Knife-icon.png")}
+				#weapon_knuckle{background-image: url("https://wiki.rage.mp/images/b/b7/Knuckles-icon.png")}
+				#weapon_machete{background-image: url("https://wiki.rage.mp/images/d/dc/Machete-icon.png")}
+				#weapon_nightstick{background-image: url("https://wiki.rage.mp/images/e/e6/Nightstick-icon.png")}
+				#weapon_poolcue{background-image: url("https://wiki.rage.mp/images/3/3a/Pool-cue-icon.png")}
+				#weapon_stone_hatchet{background-image: url("https://wiki.rage.mp/images/2/21/Stone-hatchet-icon.png")}
+				#weapon_switchblade{background-image: url("https://wiki.rage.mp/images/c/ce/Switch-blade-icon.png")}
+				#weapon_wrench{background-image: url("https://wiki.rage.mp/images/2/22/Pipe-wrench-icon.png")}
+				#weapon_unarmed{background-image: url("https://wiki.rage.mp/images/b/b7/Fist-icon.png")}
+			</style>
+		</div>
+		<div id="Handguns" class="tab">
+			<button id="weapon_appistol" class="weapon">AP Pistol</button>
+			<!-- <button id="weapon_ceramicpistol" class="weapon">Ceramic Pistol</button> -->
+			<button id="weapon_combatpistol" class="weapon">Combat Pistol</button>
+			<button id="weapon_heavypistol" class="weapon">Heavy Pistol</button>
+			<button id="weapon_pistol" class="weapon">Pistol</button>
+			<button id="weapon_pistol_mk2" class="weapon">Pistol MK2</button>
+			<button id="weapon_pistol50" class="weapon">Pistol .50</button>
+			<button id="weapon_snspistol" class="weapon">SNS Pistol</button>
+			<button id="weapon_snspistol_mk2" class="weapon">SNS Pistol MK2</button>
+			<button id="weapon_vintagepistol" class="weapon">Vintage Pistol</button>
+			<button id="weapon_doubleaction" class="weapon">Double Action Revolver</button>
+			<button id="weapon_revolver" class="weapon">Heavy Revolver</button>
+			<button id="weapon_revolver_mk2" class="weapon">Heavy Revolver MK2</button>
+			<!-- <button id="weapon_navyrevolver" class="weapon">Navy Revolver</button> -->
+			<button id="weapon_flaregun" class="weapon">Flare Gun</button>
+			<button id="weapon_stungun" class="weapon">Stun Gun</button>
+			<button id="weapon_marksmanpistol" class="weapon">Marksman Pistol</button>
+			<button id="weapon_raypistol" class="weapon">Up-n-Atomizer Ray Gun</button>
+			<style>
+				#weapon_appistol{background-image: url("https://wiki.rage.mp/images/4/4d/Appistol-icon.png")}
+				#weapon_ceramicpistol{background-image: url("https://wiki.rage.mp/images/a/ad/Ceramic-pistol-icon.png")}
+				#weapon_combatpistol{background-image: url("https://wiki.rage.mp/images/1/16/Combat-pistol-icon.png")}
+				#weapon_heavypistol{background-image: url("https://wiki.rage.mp/images/7/78/Heavy-pistol-icon.png")}
+				#weapon_pistol{background-image: url("https://wiki.rage.mp/images/9/95/Pistol-icon.png")}
+				#weapon_pistol_mk2{background-image: url("https://wiki.rage.mp/images/4/43/Pistol-mk2-icon.png")}
+				#weapon_pistol50{background-image: url("https://wiki.rage.mp/images/c/c5/Pistol.50-icon.png")}
+				#weapon_snspistol{background-image: url("https://wiki.rage.mp/images/9/96/Sns-pistol-icon.png")}
+				#weapon_snspistol_mk2{background-image: url("https://wiki.rage.mp/images/1/16/Sns-pistol-mk2-icon.png")}
+				#weapon_vintagepistol{background-image: url("https://wiki.rage.mp/images/9/97/Vintage-pistol-icon.png")}
+				#weapon_doubleaction{background-image: url("https://wiki.rage.mp/images/4/45/Double-action-revolver-icon.png")}
+				#weapon_revolver{background-image: url("https://wiki.rage.mp/images/9/93/Heavy-revolver-icon.png")}
+				#weapon_revolver_mk2{background-image: url("https://wiki.rage.mp/images/c/c0/Heavy-revolver-mk2-icon.png")}
+				#weapon_navyrevolver{background-image: url("https://wiki.rage.mp/images/1/15/Navy-revolver-icon.png")}
+				#weapon_flaregun{background-image: url("https://wiki.rage.mp/images/0/0d/Flaregun-icon.png")}
+				#weapon_stungun{background-image: url("https://wiki.rage.mp/images/3/3c/Stungun-icon.png")}
+				#weapon_marksmanpistol{background-image: url("https://wiki.rage.mp/images/4/47/Marksman-pistol-icon.png")}
+				#weapon_raypistol{background-image: url("https://wiki.rage.mp/images/8/89/Up-n-atomizer-icon.png")}
+			</style>
+		</div>
+		<div id="MachineGuns" class="tab">
+			<button id="weapon_assaultsmg" class="weapon">Assault SMG</button>
+			<button id="weapon_combatpdw" class="weapon">Combat PDW</button>
+			<button id="weapon_machinepistol" class="weapon">Machine Pistol (TEC-9)</button>
+			<button id="weapon_microsmg" class="weapon">Micro SMG</button>
+			<button id="weapon_minismg" class="weapon">Mini SMG</button>
+			<button id="weapon_smg" class="weapon">SMG</button>
+			<button id="weapon_smg_mk2" class="weapon">SMG MK2</button>
+			<button id="weapon_raycarbine" class="weapon">Unholy Hellbringer</button>
+			<button id="weapon_combatmg" class="weapon">Combat MG</button>
+			<button id="weapon_combatmg_mk2" class="weapon">Combat MG MK2</button>
+			<button id="weapon_gusenberg" class="weapon">Gusenberg Sweeper</button>
+			<button id="weapon_mg" class="weapon">MG</button>
+			<style>
+				#weapon_assaultsmg{background-image: url("https://wiki.rage.mp/images/3/30/Assault-smg-icon.png")}
+				#weapon_combatpdw{background-image: url("https://wiki.rage.mp/images/4/45/Combat-pdw-icon.png")}
+				#weapon_machinepistol{background-image: url("https://wiki.rage.mp/images/2/24/Machine-pistol-icon.png")}
+				#weapon_microsmg{background-image: url("https://wiki.rage.mp/images/3/3a/Micro-smg-icon.png")}
+				#weapon_minismg{background-image: url("https://wiki.rage.mp/images/d/d3/Mini-smg-icon.png")}
+				#weapon_smg{background-image: url("https://wiki.rage.mp/images/3/30/Smg-icon.png")}
+				#weapon_smg_mk2{background-image: url("https://wiki.rage.mp/images/d/d1/Smg-mk2-icon.png")}
+				#weapon_raycarbine{background-image: url("https://wiki.rage.mp/images/8/8f/Unholy-hellbringer-icon.png")}
+				#weapon_combatmg{background-image: url("https://wiki.rage.mp/images/9/94/Combat-mg-icon.png")}
+				#weapon_combatmg_mk2{background-image: url("https://wiki.rage.mp/images/3/31/Combat-mg-mk2-icon.png")}
+				#weapon_gusenberg{background-image: url("https://wiki.rage.mp/images/8/8f/Gusenberg-sweeper-icon.png")}
+				#weapon_mg{background-image: url("https://wiki.rage.mp/images/9/98/Mg-icon.png")}
+			</style>
+		</div>
+		<div id="AssaultRifles" class="tab">
+			<button id="weapon_advancedrifle" class="weapon">Advanced Rifle</button>
+			<button id="weapon_assaultrifle" class="weapon">Assault Rifle</button>
+			<button id="weapon_assaultrifle_mk2" class="weapon">Assault Rifle MK2</button>
+			<button id="weapon_bullpuprifle" class="weapon">Bullpup Rifle</button>
+			<button id="weapon_bullpuprifle_mk2" class="weapon">Bullpup Rifle MK2</button>
+			<button id="weapon_carbinerifle" class="weapon">Carbine Rifle</button>
+			<button id="weapon_carbinerifle_mk2" class="weapon">Carbine Rifle MK2</button>
+			<button id="weapon_compactrifle" class="weapon">Compact Rifle</button>
+			<button id="weapon_specialcarbine" class="weapon">Special Carbine Rifle</button>
+			<button id="weapon_specialcarbine_mk2" class="weapon">Special Carbine Rifle MK2</button>
+			<style>
+				#weapon_advancedrifle{background-image: url("https://wiki.rage.mp/images/a/ae/Advanced-rifle-icon.png")}
+				#weapon_assaultrifle{background-image: url("https://wiki.rage.mp/images/6/61/Assault-rifle-icon.png")}
+				#weapon_assaultrifle_mk2{background-image: url("https://wiki.rage.mp/images/6/63/Assault-rifle-mk2-icon.png")}
+				#weapon_bullpuprifle{background-image: url("https://wiki.rage.mp/images/0/09/Bullpup-rifle-icon.png")}
+				#weapon_bullpuprifle_mk2{background-image: url("https://wiki.rage.mp/images/e/e1/Bullpup-rifle-mk2-icon.png")}
+				#weapon_carbinerifle{background-image: url("https://wiki.rage.mp/images/7/73/Carbine-rifle-icon.png")}
+				#weapon_carbinerifle_mk2{background-image: url("https://wiki.rage.mp/images/3/3f/Carbine-rifle-mk2-icon.png")}
+				#weapon_compactrifle{background-image: url("https://wiki.rage.mp/images/c/c9/Compact-rifle-icon.png")}
+				#weapon_specialcarbine{background-image: url("https://wiki.rage.mp/images/b/b7/Special-carbine-icon.png")}
+				#weapon_specialcarbine_mk2{background-image: url("https://wiki.rage.mp/images/3/34/Special-carbine-mk2-icon.png")}
+			</style>
+		</div>
+		<div id="SniperRifles" class="tab">
+			<button id="weapon_heavysniper" class="weapon">Heavy Sniper</button>
+			<button id="weapon_heavysniper_mk2" class="weapon">Heavy Sniper MK2</button>
+			<button id="weapon_marksmanrifle" class="weapon">Marksman Rifle</button>
+			<button id="weapon_marksmanrifle_mk2" class="weapon">Marksman Rifle MK2</button>
+			<button id="weapon_sniperrifle" class="weapon">Sniper Rifle</button>
+			<style>
+				#weapon_heavysniper{background-image: url("https://wiki.rage.mp/images/5/54/Heavy-sniper-icon.png")}
+				#weapon_heavysniper_mk2{background-image: url("https://wiki.rage.mp/images/c/cf/Heavy-sniper-mk2-icon.png")}
+				#weapon_marksmanrifle{background-image: url("https://wiki.rage.mp/images/2/22/Marksman-rifle-icon.png")}
+				#weapon_marksmanrifle_mk2{background-image: url("https://wiki.rage.mp/images/1/17/Marksman-rifle-mk2-icon.png")}
+				#weapon_sniperrifle{background-image: url("https://wiki.rage.mp/images/e/ec/Sniper-rifle-icon.png")}
+			</style>
+		</div>
+		<div id="Shotguns" class="tab">
+			<button id="weapon_assaultshotgun" class="weapon">Assault Shotgun</button>
+			<button id="weapon_bullpupshotgun" class="weapon">Bullpup Shotgun</button>
+			<button id="weapon_dbshotgun" class="weapon">Double Barrel Shotgun</button>
+			<button id="weapon_heavyshotgun" class="weapon">Heavy Shotgun</button>
+			<button id="weapon_pumpshotgun" class="weapon">Pump Shotgun</button>
+			<button id="weapon_pumpshotgun_mk2" class="weapon">Pump Shotgun MK2</button>
+			<button id="weapon_sawnoffshotgun" class="weapon">Sawn Off Shotgun</button>
+			<button id="weapon_autoshotgun" class="weapon">Sweeper Shotgun</button>
+			<button id="weapon_musket" class="weapon">Musket</button>
+			<style>
+				#weapon_assaultshotgun{background-image: url("https://wiki.rage.mp/images/e/e3/Assault-shotgun-icon.png")}
+				#weapon_bullpupshotgun{background-image: url("https://wiki.rage.mp/images/7/7f/Bullpup-shotgun-icon.png")}
+				#weapon_dbshotgun{background-image: url("https://wiki.rage.mp/images/8/8d/Double-barrel-shotgun-icon.png")}
+				#weapon_heavyshotgun{background-image: url("https://wiki.rage.mp/images/5/5d/Heavy-shotgun-icon.png")}
+				#weapon_pumpshotgun{background-image: url("https://wiki.rage.mp/images/0/09/Pump-shotgun-icon.png")}
+				#weapon_pumpshotgun_mk2{background-image: url("https://wiki.rage.mp/images/6/69/Pump-shotgun-mk2-icon.png")}
+				#weapon_sawnoffshotgun{background-image: url("https://wiki.rage.mp/images/b/ba/Sawed-off-shotgun-icon.png")}
+				#weapon_autoshotgun{background-image: url("https://wiki.rage.mp/images/a/a8/Sweeper-shotgun-icon.png")}
+				#weapon_musket{background-image: url("https://wiki.rage.mp/images/8/8c/Musket-icon.png")}
+			</style>
+		</div>
+		<div id="HeavyWeapons" class="tab">
+			<button id="weapon_compactlauncher" class="weapon">Compact Grenade Launcher</button>
+			<button id="weapon_firework" class="weapon">Firework Launcher</button>
+			<button id="weapon_grenadelauncher" class="weapon">Grenade Launcher</button>
+			<button id="weapon_hominglauncher" class="weapon">Homing Launcher</button>
+			<button id="weapon_minigun" class="weapon">Minigun</button>
+			<button id="weapon_railgun" class="weapon">Railgun</button>
+			<button id="weapon_rpg" class="weapon">RPG</button>
+			<!-- <button id="weapon_grenadelauncher_smoke" class="weapon">Smoke Grenade Launcher</button> -->
+			<button id="weapon_rayminigun" class="weapon">Widowmaker</button>
+			<style>
+				#weapon_compactlauncher{background-image: url("https://wiki.rage.mp/images/0/0d/Grenade-compact-launcher-icon.png")}
+				#weapon_firework{background-image: url("https://wiki.rage.mp/images/5/54/Firework-launcher-icon.png")}
+				#weapon_grenadelauncher{background-image: url("https://wiki.rage.mp/images/a/ae/Grenade-launcher-icon.png")}
+				#weapon_hominglauncher{background-image: url("https://wiki.rage.mp/images/1/14/Homing-launcher-icon.png")}
+				#weapon_minigun{background-image: url("https://wiki.rage.mp/images/8/8b/Minigun-icon.png")}
+				#weapon_railgun{background-image: url("https://wiki.rage.mp/images/a/ad/Railgun-icon.png")}
+				#weapon_rpg{background-image: url("https://wiki.rage.mp/images/7/7d/Rocket-launcher-icon.png")}
+				#weapon_grenadelauncher_smoke{background-image: url("https://wiki.rage.mp/images/a/ae/Grenade-launcher-icon.png")}
+				#weapon_rayminigun{background-image: url("https://wiki.rage.mp/images/e/ec/Widowmaker-icon.png")}
+			</style>
+		</div>
+		<div id="Throwables" class="tab">
+			<button id="weapon_ball" class="weapon">Baseball</button>
+			<button id="weapon_bzgas" class="weapon">Smoke Grenade (BZ Gas)</button>
+			<button id="weapon_fireextinguisher" class="weapon">Fire Extinguisher</button>
+			<button id="weapon_flare" class="weapon">Flare</button>
+			<button id="weapon_grenade" class="weapon">Grenade</button>
+			<!-- <button id="weapon_hazardcan" class="weapon">Hazardous Jerry Can</button> -->
+			<button id="weapon_petrolcan" class="weapon">Petrol Can</button>
+			<button id="weapon_molotov" class="weapon">Molotov</button>
+			<button id="weapon_pipebomb" class="weapon">Pipe Bomb</button>
+			<button id="weapon_proxmine" class="weapon">Proximity Mine</button>
+			<button id="weapon_smokegrenade" class="weapon">Tear Gas</button>
+			<button id="weapon_snowball" class="weapon">Snowball</button>
+			<button id="weapon_stickybomb" class="weapon">Sticky Bomb</button>
+			<style>
+				#weapon_ball{background-image: url("https://wiki.rage.mp/images/4/4b/Ball-icon.png")}
+				#weapon_bzgas{background-image: url("https://wiki.rage.mp/images/d/d3/Bz-gas-icon.png")}
+				#weapon_fireextinguisher{background-image: url("https://wiki.rage.mp/images/1/13/Fire2.png")}
+				#weapon_flare{background-image: url("https://wiki.rage.mp/images/0/09/Flare-icon.png")}
+				#weapon_grenade{background-image: url("https://wiki.rage.mp/images/5/54/Grenade-icon.png")}
+				#weapon_hazardcan{background-image: url("https://wiki.rage.mp/images/2/2b/Petrolcan-icon.png")}
+				#weapon_petrolcan{background-image: url("https://wiki.rage.mp/images/2/2b/Petrolcan-icon.png")}
+				#weapon_molotov{background-image: url("https://wiki.rage.mp/images/4/46/Molotov-icon.png")}
+				#weapon_pipebomb{background-image: url("https://wiki.rage.mp/images/d/dc/Pipe-bomb-icon.png")}
+				#weapon_proxmine{background-image: url("https://wiki.rage.mp/images/a/a8/Proximity-mines-icon.png")}
+				#weapon_smokegrenade{background-image: url("https://wiki.rage.mp/images/8/8a/Tear-gas-icon.png")}
+				#weapon_snowball{background-image: url("https://wiki.rage.mp/images/0/04/Snowball-icon.png")}
+				#weapon_stickybomb{background-image: url("https://wiki.rage.mp/images/3/3a/Sticky-bomb-icon.png")}
+			</style>
+		</div>
+		<div id="Other" class="tab">
+			<button id="gadget_parachute" class="weapon">Parachute</button>
+			<div>
+				<p>These disappear if another Weapon is selected</p>
+			</div>
+			<button id="weapon_digiscanner" class="weapon">Digiscanner</button>
+			<button id="weapon_briefcase" class="weapon">Briefcase</button>
+			<button id="weapon_briefcase_02" class="weapon">Briefcase 2</button>
+			<style>
+				#gadget_parachute{background-image: url("https://wiki.rage.mp/images/2/24/Parachute-icon.png")}
+				#weapon_digiscanner{background-image: url("https://vignette.wikia.nocookie.net/gtawiki/images/c/cb/Digiscanner-GTAV.png")}
+				#weapon_briefcase{background-image: url("https://www.stickpng.com/assets/images/59bf81407a216d0b052f12e6.png")}
+				#weapon_briefcase_02{background-image: url("https://www.stickpng.com/assets/images/59bf81407a216d0b052f12e6.png")}
+			</style>
+		</div>
+
+		<div id="Components" class="tab">
+			<div>
+				<button id="parachutetint0" name="gadget_parachute" class="component">Rainbow Tint</button>
+				<button id="parachutetint1" name="gadget_parachute" class="component">Dark Red Tint</button>
+				<button id="parachutetint2" name="gadget_parachute" class="component">White, Blue & Yellow Tint</button>
+				<button id="parachutetint3" name="gadget_parachute" class="component">Black, Red & White Tint</button>
+				<button id="parachutetint4" name="gadget_parachute" class="component">Red, White & Blue Tint</button>
+				<button id="parachutetint5" name="gadget_parachute" class="component">Blue Tint</button>
+				<button id="parachutetint6" name="gadget_parachute" class="component">Black Tint</button>
+				<button id="parachutetint7" name="gadget_parachute" class="component">Black & Yellow Tint</button>
+
+				<button id="reserveparachutetint0" name="gadget_parachute" class="component">Rainbow Tint Reserve</button>
+				<button id="reserveparachutetint1" name="gadget_parachute" class="component">Dark Red Tint Reserve</button>
+				<button id="reserveparachutetint2" name="gadget_parachute" class="component">White, Blue & Yellow Tint Reserve</button>
+				<button id="reserveparachutetint3" name="gadget_parachute" class="component">Black, Red & White Tint Reserve</button>
+				<button id="reserveparachutetint4" name="gadget_parachute" class="component">Red, White & Blue Tint Reserve</button>
+				<button id="reserveparachutetint5" name="gadget_parachute" class="component">Blue Tint Reserve</button>
+				<button id="reserveparachutetint6" name="gadget_parachute" class="component">Black Tint Reserve</button>
+				<button id="reserveparachutetint7" name="gadget_parachute" class="component">Black & Yellow Tint Reserve</button>
+
+				<button id="tint0" name="weapon_battleaxe weapon_bottle weapon_dagger weapon_hatchet weapon_knife weapon_knuckle weapon_machete weapon_stone_hatchet weapon_switchblade weapon_appistol weapon_combatpistol weapon_heavypistol weapon_pistol weapon_pistol50 weapon_snspistol weapon_vintagepistol weapon_revolver weapon_flaregun weapon_stungun weapon_marksmanpistol  weapon_assaultsmg weapon_combatpdw weapon_machinepistol weapon_microsmg weapon_minismg weapon_smg weapon_combatmg weapon_gusenberg weapon_mg weapon_advancedrifle weapon_assaultrifle weapon_bullpuprifle weapon_carbinerifle weapon_compactrifle weapon_specialcarbine weapon_heavysniper weapon_marksmanrifle weapon_sniperrifle weapon_assaultshotgun weapon_bullpupshotgun weapon_dbshotgun weapon_heavyshotgun weapon_pumpshotgun weapon_sawnoffshotgun weapon_autoshotgun weapon_musket weapon_compactlauncher weapon_firework weapon_grenadelauncher weapon_hominglauncher weapon_minigun weapon_railgun weapon_rpg"
+				class="component">No Tint</button>
+				<button id="tint1" name="weapon_battleaxe weapon_bottle weapon_dagger weapon_hatchet weapon_knife weapon_knuckle weapon_machete weapon_stone_hatchet weapon_switchblade weapon_appistol weapon_combatpistol weapon_heavypistol weapon_pistol weapon_pistol50 weapon_snspistol weapon_vintagepistol weapon_revolver weapon_flaregun weapon_stungun weapon_marksmanpistol weapon_assaultsmg weapon_combatpdw weapon_machinepistol weapon_microsmg weapon_minismg weapon_smg weapon_combatmg weapon_gusenberg weapon_mg weapon_advancedrifle weapon_assaultrifle weapon_bullpuprifle weapon_carbinerifle weapon_compactrifle weapon_specialcarbine weapon_heavysniper weapon_marksmanrifle weapon_sniperrifle weapon_assaultshotgun weapon_bullpupshotgun weapon_dbshotgun weapon_heavyshotgun weapon_pumpshotgun weapon_sawnoffshotgun weapon_autoshotgun weapon_musket weapon_compactlauncher weapon_firework weapon_grenadelauncher weapon_hominglauncher weapon_minigun weapon_railgun weapon_rpg"
+				class="component">Green Tint</button>
+				<button id="tint2" name="weapon_battleaxe weapon_bottle weapon_dagger weapon_hatchet weapon_knife weapon_knuckle weapon_machete weapon_stone_hatchet weapon_switchblade weapon_appistol weapon_combatpistol weapon_heavypistol weapon_pistol weapon_pistol50 weapon_snspistol weapon_vintagepistol weapon_revolver weapon_flaregun weapon_stungun weapon_marksmanpistol weapon_assaultsmg weapon_combatpdw weapon_machinepistol weapon_microsmg weapon_minismg weapon_smg weapon_combatmg weapon_gusenberg weapon_mg weapon_advancedrifle weapon_assaultrifle weapon_bullpuprifle weapon_carbinerifle weapon_compactrifle weapon_specialcarbine weapon_heavysniper weapon_marksmanrifle weapon_sniperrifle weapon_assaultshotgun weapon_bullpupshotgun weapon_dbshotgun weapon_heavyshotgun weapon_pumpshotgun weapon_sawnoffshotgun weapon_autoshotgun weapon_musket weapon_compactlauncher weapon_firework weapon_grenadelauncher weapon_hominglauncher weapon_minigun weapon_railgun weapon_rpg"
+				class="component">Gold Tint</button>
+				<button id="tint3" name="weapon_battleaxe weapon_bottle weapon_dagger weapon_hatchet weapon_knife weapon_knuckle weapon_machete weapon_stone_hatchet weapon_switchblade weapon_appistol weapon_combatpistol weapon_heavypistol weapon_pistol weapon_pistol50 weapon_snspistol weapon_vintagepistol weapon_revolver weapon_flaregun weapon_stungun weapon_marksmanpistol weapon_assaultsmg weapon_combatpdw weapon_machinepistol weapon_microsmg weapon_minismg weapon_smg weapon_combatmg weapon_gusenberg weapon_mg weapon_advancedrifle weapon_assaultrifle weapon_bullpuprifle weapon_carbinerifle weapon_compactrifle weapon_specialcarbine weapon_heavysniper weapon_marksmanrifle weapon_sniperrifle weapon_assaultshotgun weapon_bullpupshotgun weapon_dbshotgun weapon_heavyshotgun weapon_pumpshotgun weapon_sawnoffshotgun weapon_autoshotgun weapon_musket weapon_compactlauncher weapon_firework weapon_grenadelauncher weapon_hominglauncher weapon_minigun weapon_railgun weapon_rpg"
+				class="component">Pink Tint</button>
+				<button id="tint4" name="weapon_battleaxe weapon_bottle weapon_dagger weapon_hatchet weapon_knife weapon_knuckle weapon_machete weapon_stone_hatchet weapon_switchblade weapon_appistol weapon_combatpistol weapon_heavypistol weapon_pistol weapon_pistol50 weapon_snspistol weapon_vintagepistol weapon_revolver weapon_flaregun weapon_stungun weapon_marksmanpistol weapon_assaultsmg weapon_combatpdw weapon_machinepistol weapon_microsmg weapon_minismg weapon_smg weapon_combatmg weapon_gusenberg weapon_mg weapon_advancedrifle weapon_assaultrifle weapon_bullpuprifle weapon_carbinerifle weapon_compactrifle weapon_specialcarbine weapon_heavysniper weapon_marksmanrifle weapon_sniperrifle weapon_assaultshotgun weapon_bullpupshotgun weapon_dbshotgun weapon_heavyshotgun weapon_pumpshotgun weapon_sawnoffshotgun weapon_autoshotgun weapon_musket weapon_compactlauncher weapon_firework weapon_grenadelauncher weapon_hominglauncher weapon_minigun weapon_railgun weapon_rpg"
+				class="component">Army Tint</button>
+				<button id="tint5" name="weapon_battleaxe weapon_bottle weapon_dagger weapon_hatchet weapon_knife weapon_knuckle weapon_machete weapon_stone_hatchet weapon_switchblade weapon_appistol weapon_combatpistol weapon_heavypistol weapon_pistol weapon_pistol50 weapon_snspistol weapon_vintagepistol weapon_revolver weapon_flaregun weapon_stungun weapon_marksmanpistol weapon_assaultsmg weapon_combatpdw weapon_machinepistol weapon_microsmg weapon_minismg weapon_smg weapon_combatmg weapon_gusenberg weapon_mg weapon_advancedrifle weapon_assaultrifle weapon_bullpuprifle weapon_carbinerifle weapon_compactrifle weapon_specialcarbine weapon_heavysniper weapon_marksmanrifle weapon_sniperrifle weapon_assaultshotgun weapon_bullpupshotgun weapon_dbshotgun weapon_heavyshotgun weapon_pumpshotgun weapon_sawnoffshotgun weapon_autoshotgun weapon_musket weapon_compactlauncher weapon_firework weapon_grenadelauncher weapon_hominglauncher weapon_minigun weapon_railgun weapon_rpg"
+				class="component">LSPD Tint</button>
+				<button id="tint6" name="weapon_battleaxe weapon_bottle weapon_dagger weapon_hatchet weapon_knife weapon_knuckle weapon_machete weapon_stone_hatchet weapon_switchblade weapon_appistol weapon_combatpistol weapon_heavypistol weapon_pistol weapon_pistol50 weapon_snspistol weapon_vintagepistol weapon_revolver weapon_flaregun weapon_stungun weapon_marksmanpistol weapon_assaultsmg weapon_combatpdw weapon_machinepistol weapon_microsmg weapon_minismg weapon_smg weapon_combatmg weapon_gusenberg weapon_mg weapon_advancedrifle weapon_assaultrifle weapon_bullpuprifle weapon_carbinerifle weapon_compactrifle weapon_specialcarbine weapon_heavysniper weapon_marksmanrifle weapon_sniperrifle weapon_assaultshotgun weapon_bullpupshotgun weapon_dbshotgun weapon_heavyshotgun weapon_pumpshotgun weapon_sawnoffshotgun weapon_autoshotgun weapon_musket weapon_compactlauncher weapon_firework weapon_grenadelauncher weapon_hominglauncher weapon_minigun weapon_railgun weapon_rpg"
+				class="component">Orange Tint</button>
+
+				<button id="tint7" name="weapon_battleaxe weapon_bottle weapon_dagger weapon_hatchet weapon_knife weapon_knuckle weapon_machete weapon_stone_hatchet weapon_switchblade weapon_appistol weapon_combatpistol weapon_heavypistol weapon_pistol weapon_pistol50 weapon_snspistol weapon_vintagepistol weapon_revolver weapon_flaregun weapon_stungun weapon_marksmanpistol weapon_assaultsmg weapon_combatpdw weapon_machinepistol weapon_microsmg weapon_minismg weapon_smg weapon_combatmg weapon_gusenberg weapon_mg weapon_advancedrifle weapon_assaultrifle weapon_bullpuprifle weapon_carbinerifle weapon_compactrifle weapon_specialcarbine weapon_heavysniper weapon_marksmanrifle weapon_sniperrifle weapon_assaultshotgun weapon_bullpupshotgun weapon_dbshotgun weapon_heavyshotgun weapon_pumpshotgun weapon_sawnoffshotgun weapon_autoshotgun weapon_musket weapon_compactlauncher weapon_firework weapon_grenadelauncher weapon_hominglauncher weapon_minigun weapon_railgun weapon_rpg" 
+				class="component">Platinum Tint</button>
+
+				<button id="tintray0" name="weapon_raypistol weapon_raycarbine weapon_rayminigun" class="component">No Tint</button>
+				<button id="tintray1" name="weapon_raypistol weapon_raycarbine weapon_rayminigun" class="component">Purple Tint</button>
+				<button id="tintray2" name="weapon_raypistol weapon_raycarbine weapon_rayminigun" class="component">Green Tint</button>
+				<button id="tintray3" name="weapon_raypistol weapon_raycarbine weapon_rayminigun" class="component">Orange Tint</button>
+				<button id="tintray4" name="weapon_raypistol weapon_raycarbine weapon_rayminigun" class="component">Pink Tint</button>
+				<button id="tintray5" name="weapon_raypistol weapon_raycarbine weapon_rayminigun" class="component">Gold Tint</button>
+				<button id="tintray6" name="weapon_raypistol weapon_raycarbine weapon_rayminigun" class="component">Platinum Tint</button>
+
+				<button id="tintmk20"  name="weapon_pistol_mk2 weapon_snspistol_mk2 weapon_smg_mk2 weapon_combatmg_mk2 weapon_assaultrifle_mk2 weapon_bullpuprifle_mk2 weapon_carbinerifle_mk2 weapon_specialcarbine_mk2 weapon_heavysniper_mk2 weapon_marksmanrifle_mk2 weapon_pumpshotgun_mk2 weapon_revolver_mk2"
+				class="component">No Tint</button>
+				<button id="tintmk21"  name="weapon_pistol_mk2 weapon_snspistol_mk2 weapon_smg_mk2 weapon_combatmg_mk2 weapon_assaultrifle_mk2 weapon_bullpuprifle_mk2 weapon_carbinerifle_mk2 weapon_specialcarbine_mk2 weapon_heavysniper_mk2 weapon_marksmanrifle_mk2 weapon_pumpshotgun_mk2 weapon_revolver_mk2"
+				class="component">Classic Gray Tint</button>
+				<button id="tintmk22"  name="weapon_pistol_mk2 weapon_snspistol_mk2 weapon_smg_mk2 weapon_combatmg_mk2 weapon_assaultrifle_mk2 weapon_bullpuprifle_mk2 weapon_carbinerifle_mk2 weapon_specialcarbine_mk2 weapon_heavysniper_mk2 weapon_marksmanrifle_mk2 weapon_pumpshotgun_mk2 weapon_revolver_mk2"
+				class="component">Classic Two Tone Tint</button>
+				<button id="tintmk23"  name="weapon_pistol_mk2 weapon_snspistol_mk2 weapon_smg_mk2 weapon_combatmg_mk2 weapon_assaultrifle_mk2 weapon_bullpuprifle_mk2 weapon_carbinerifle_mk2 weapon_specialcarbine_mk2 weapon_heavysniper_mk2 weapon_marksmanrifle_mk2 weapon_pumpshotgun_mk2 weapon_revolver_mk2"
+				class="component">Classic White Tint</button>
+				<button id="tintmk24"  name="weapon_pistol_mk2 weapon_snspistol_mk2 weapon_smg_mk2 weapon_combatmg_mk2 weapon_assaultrifle_mk2 weapon_bullpuprifle_mk2 weapon_carbinerifle_mk2 weapon_specialcarbine_mk2 weapon_heavysniper_mk2 weapon_marksmanrifle_mk2 weapon_pumpshotgun_mk2 weapon_revolver_mk2"
+				class="component">Classic Beige Tint</button>
+				<button id="tintmk25"  name="weapon_pistol_mk2 weapon_snspistol_mk2 weapon_smg_mk2 weapon_combatmg_mk2 weapon_assaultrifle_mk2 weapon_bullpuprifle_mk2 weapon_carbinerifle_mk2 weapon_specialcarbine_mk2 weapon_heavysniper_mk2 weapon_marksmanrifle_mk2 weapon_pumpshotgun_mk2 weapon_revolver_mk2"
+				class="component">Classic Green Tint</button>
+				<button id="tintmk26"  name="weapon_pistol_mk2 weapon_snspistol_mk2 weapon_smg_mk2 weapon_combatmg_mk2 weapon_assaultrifle_mk2 weapon_bullpuprifle_mk2 weapon_carbinerifle_mk2 weapon_specialcarbine_mk2 weapon_heavysniper_mk2 weapon_marksmanrifle_mk2 weapon_pumpshotgun_mk2 weapon_revolver_mk2"
+				class="component">Classic Blue Tint</button>
+				<button id="tintmk27"  name="weapon_pistol_mk2 weapon_snspistol_mk2 weapon_smg_mk2 weapon_combatmg_mk2 weapon_assaultrifle_mk2 weapon_bullpuprifle_mk2 weapon_carbinerifle_mk2 weapon_specialcarbine_mk2 weapon_heavysniper_mk2 weapon_marksmanrifle_mk2 weapon_pumpshotgun_mk2 weapon_revolver_mk2"
+				class="component">Classic Earth Tint</button>
+				<button id="tintmk28"  name="weapon_pistol_mk2 weapon_snspistol_mk2 weapon_smg_mk2 weapon_combatmg_mk2 weapon_assaultrifle_mk2 weapon_bullpuprifle_mk2 weapon_carbinerifle_mk2 weapon_specialcarbine_mk2 weapon_heavysniper_mk2 weapon_marksmanrifle_mk2 weapon_pumpshotgun_mk2 weapon_revolver_mk2"
+				class="component">Classic Brown & Black Tint</button>
+				<button id="tintmk29"  name="weapon_pistol_mk2 weapon_snspistol_mk2 weapon_smg_mk2 weapon_combatmg_mk2 weapon_assaultrifle_mk2 weapon_bullpuprifle_mk2 weapon_carbinerifle_mk2 weapon_specialcarbine_mk2 weapon_heavysniper_mk2 weapon_marksmanrifle_mk2 weapon_pumpshotgun_mk2 weapon_revolver_mk2"
+				class="component">Red Contrast Tint</button>
+				<button id="tintmk210" name="weapon_pistol_mk2 weapon_snspistol_mk2 weapon_smg_mk2 weapon_combatmg_mk2 weapon_assaultrifle_mk2 weapon_bullpuprifle_mk2 weapon_carbinerifle_mk2 weapon_specialcarbine_mk2 weapon_heavysniper_mk2 weapon_marksmanrifle_mk2 weapon_pumpshotgun_mk2 weapon_revolver_mk2"
+				class="component">Blue Contrast Tint</button>
+				<button id="tintmk211" name="weapon_pistol_mk2 weapon_snspistol_mk2 weapon_smg_mk2 weapon_combatmg_mk2 weapon_assaultrifle_mk2 weapon_bullpuprifle_mk2 weapon_carbinerifle_mk2 weapon_specialcarbine_mk2 weapon_heavysniper_mk2 weapon_marksmanrifle_mk2 weapon_pumpshotgun_mk2 weapon_revolver_mk2"
+				class="component">Yellow Contrast Tint</button>
+				<button id="tintmk212" name="weapon_pistol_mk2 weapon_snspistol_mk2 weapon_smg_mk2 weapon_combatmg_mk2 weapon_assaultrifle_mk2 weapon_bullpuprifle_mk2 weapon_carbinerifle_mk2 weapon_specialcarbine_mk2 weapon_heavysniper_mk2 weapon_marksmanrifle_mk2 weapon_pumpshotgun_mk2 weapon_revolver_mk2"
+				class="component">Orange Contrast Tint</button>
+				<button id="tintmk213" name="weapon_pistol_mk2 weapon_snspistol_mk2 weapon_smg_mk2 weapon_combatmg_mk2 weapon_assaultrifle_mk2 weapon_bullpuprifle_mk2 weapon_carbinerifle_mk2 weapon_specialcarbine_mk2 weapon_heavysniper_mk2 weapon_marksmanrifle_mk2 weapon_pumpshotgun_mk2 weapon_revolver_mk2"
+				class="component">Bold Pink Tint</button>
+				<button id="tintmk214" name="weapon_pistol_mk2 weapon_snspistol_mk2 weapon_smg_mk2 weapon_combatmg_mk2 weapon_assaultrifle_mk2 weapon_bullpuprifle_mk2 weapon_carbinerifle_mk2 weapon_specialcarbine_mk2 weapon_heavysniper_mk2 weapon_marksmanrifle_mk2 weapon_pumpshotgun_mk2 weapon_revolver_mk2"
+				class="component">Bold Purple & Yellow Tint</button>
+				<button id="tintmk215" name="weapon_pistol_mk2 weapon_snspistol_mk2 weapon_smg_mk2 weapon_combatmg_mk2 weapon_assaultrifle_mk2 weapon_bullpuprifle_mk2 weapon_carbinerifle_mk2 weapon_specialcarbine_mk2 weapon_heavysniper_mk2 weapon_marksmanrifle_mk2 weapon_pumpshotgun_mk2 weapon_revolver_mk2"
+				class="component">Bold Orange Tint</button>
+				<button id="tintmk216" name="weapon_pistol_mk2 weapon_snspistol_mk2 weapon_smg_mk2 weapon_combatmg_mk2 weapon_assaultrifle_mk2 weapon_bullpuprifle_mk2 weapon_carbinerifle_mk2 weapon_specialcarbine_mk2 weapon_heavysniper_mk2 weapon_marksmanrifle_mk2 weapon_pumpshotgun_mk2 weapon_revolver_mk2"
+				class="component">Bold Green & Purple Tint</button>
+				<button id="tintmk217" name="weapon_pistol_mk2 weapon_snspistol_mk2 weapon_smg_mk2 weapon_combatmg_mk2 weapon_assaultrifle_mk2 weapon_bullpuprifle_mk2 weapon_carbinerifle_mk2 weapon_specialcarbine_mk2 weapon_heavysniper_mk2 weapon_marksmanrifle_mk2 weapon_pumpshotgun_mk2 weapon_revolver_mk2"
+				class="component">Bold Red Features Tint</button>
+				<button id="tintmk218" name="weapon_pistol_mk2 weapon_snspistol_mk2 weapon_smg_mk2 weapon_combatmg_mk2 weapon_assaultrifle_mk2 weapon_bullpuprifle_mk2 weapon_carbinerifle_mk2 weapon_specialcarbine_mk2 weapon_heavysniper_mk2 weapon_marksmanrifle_mk2 weapon_pumpshotgun_mk2 weapon_revolver_mk2"
+				class="component">Bold Green Features Tint</button>
+				<button id="tintmk219" name="weapon_pistol_mk2 weapon_snspistol_mk2 weapon_smg_mk2 weapon_combatmg_mk2 weapon_assaultrifle_mk2 weapon_bullpuprifle_mk2 weapon_carbinerifle_mk2 weapon_specialcarbine_mk2 weapon_heavysniper_mk2 weapon_marksmanrifle_mk2 weapon_pumpshotgun_mk2 weapon_revolver_mk2"
+				class="component">Bold Cyan Features Tint</button>
+				<button id="tintmk220" name="weapon_pistol_mk2 weapon_snspistol_mk2 weapon_smg_mk2 weapon_combatmg_mk2 weapon_assaultrifle_mk2 weapon_bullpuprifle_mk2 weapon_carbinerifle_mk2 weapon_specialcarbine_mk2 weapon_heavysniper_mk2 weapon_marksmanrifle_mk2 weapon_pumpshotgun_mk2 weapon_revolver_mk2"
+				class="component">Bold Yellow Features Tint</button>
+				<button id="tintmk221" name="weapon_pistol_mk2 weapon_snspistol_mk2 weapon_smg_mk2 weapon_combatmg_mk2 weapon_assaultrifle_mk2 weapon_bullpuprifle_mk2 weapon_carbinerifle_mk2 weapon_specialcarbine_mk2 weapon_heavysniper_mk2 weapon_marksmanrifle_mk2 weapon_pumpshotgun_mk2 weapon_revolver_mk2"
+				class="component">Bold Red & White Tint</button>
+				<button id="tintmk222" name="weapon_pistol_mk2 weapon_snspistol_mk2 weapon_smg_mk2 weapon_combatmg_mk2 weapon_assaultrifle_mk2 weapon_bullpuprifle_mk2 weapon_carbinerifle_mk2 weapon_specialcarbine_mk2 weapon_heavysniper_mk2 weapon_marksmanrifle_mk2 weapon_pumpshotgun_mk2 weapon_revolver_mk2"
+				class="component">Bold Blue & White Tint</button>
+				<button id="tintmk223" name="weapon_pistol_mk2 weapon_snspistol_mk2 weapon_smg_mk2 weapon_combatmg_mk2 weapon_assaultrifle_mk2 weapon_bullpuprifle_mk2 weapon_carbinerifle_mk2 weapon_specialcarbine_mk2 weapon_heavysniper_mk2 weapon_marksmanrifle_mk2 weapon_pumpshotgun_mk2 weapon_revolver_mk2"
+				class="component">Metallic Gold Tint</button>
+				<button id="tintmk224" name="weapon_pistol_mk2 weapon_snspistol_mk2 weapon_smg_mk2 weapon_combatmg_mk2 weapon_assaultrifle_mk2 weapon_bullpuprifle_mk2 weapon_carbinerifle_mk2 weapon_specialcarbine_mk2 weapon_heavysniper_mk2 weapon_marksmanrifle_mk2 weapon_pumpshotgun_mk2 weapon_revolver_mk2"
+				class="component">Metallic Platinum Tint</button>
+				<button id="tintmk225" name="weapon_pistol_mk2 weapon_snspistol_mk2 weapon_smg_mk2 weapon_combatmg_mk2 weapon_assaultrifle_mk2 weapon_bullpuprifle_mk2 weapon_carbinerifle_mk2 weapon_specialcarbine_mk2 weapon_heavysniper_mk2 weapon_marksmanrifle_mk2 weapon_pumpshotgun_mk2 weapon_revolver_mk2"
+				class="component">Metallic Gray & Lilac Tint</button>
+				<button id="tintmk226" name="weapon_pistol_mk2 weapon_snspistol_mk2 weapon_smg_mk2 weapon_combatmg_mk2 weapon_assaultrifle_mk2 weapon_bullpuprifle_mk2 weapon_carbinerifle_mk2 weapon_specialcarbine_mk2 weapon_heavysniper_mk2 weapon_marksmanrifle_mk2 weapon_pumpshotgun_mk2 weapon_revolver_mk2"
+				class="component">Metallic Purple & Lime Tint</button>
+				<button id="tintmk227" name="weapon_pistol_mk2 weapon_snspistol_mk2 weapon_smg_mk2 weapon_combatmg_mk2 weapon_assaultrifle_mk2 weapon_bullpuprifle_mk2 weapon_carbinerifle_mk2 weapon_specialcarbine_mk2 weapon_heavysniper_mk2 weapon_marksmanrifle_mk2 weapon_pumpshotgun_mk2 weapon_revolver_mk2"
+				class="component">Metallic Red Tint</button>
+				<button id="tintmk228" name="weapon_pistol_mk2 weapon_snspistol_mk2 weapon_smg_mk2 weapon_combatmg_mk2 weapon_assaultrifle_mk2 weapon_bullpuprifle_mk2 weapon_carbinerifle_mk2 weapon_specialcarbine_mk2 weapon_heavysniper_mk2 weapon_marksmanrifle_mk2 weapon_pumpshotgun_mk2 weapon_revolver_mk2"
+				class="component">Metallic Green Tint</button>
+				<button id="tintmk229" name="weapon_pistol_mk2 weapon_snspistol_mk2 weapon_smg_mk2 weapon_combatmg_mk2 weapon_assaultrifle_mk2 weapon_bullpuprifle_mk2 weapon_carbinerifle_mk2 weapon_specialcarbine_mk2 weapon_heavysniper_mk2 weapon_marksmanrifle_mk2 weapon_pumpshotgun_mk2 weapon_revolver_mk2"
+				class="component">Metallic Blue Tint</button>
+				<button id="tintmk230" name="weapon_pistol_mk2 weapon_snspistol_mk2 weapon_smg_mk2 weapon_combatmg_mk2 weapon_assaultrifle_mk2 weapon_bullpuprifle_mk2 weapon_carbinerifle_mk2 weapon_specialcarbine_mk2 weapon_heavysniper_mk2 weapon_marksmanrifle_mk2 weapon_pumpshotgun_mk2 weapon_revolver_mk2"
+				class="component">Metallic White & Aqua Tint</button>
+				<button id="tintmk231" name="weapon_pistol_mk2 weapon_snspistol_mk2 weapon_smg_mk2 weapon_combatmg_mk2 weapon_assaultrifle_mk2 weapon_bullpuprifle_mk2 weapon_carbinerifle_mk2 weapon_specialcarbine_mk2 weapon_heavysniper_mk2 weapon_marksmanrifle_mk2 weapon_pumpshotgun_mk2 weapon_revolver_mk2"
+				class="component">Metallic Red & Yellow Tint</button>
+
+			</div>
+			<div>
+				<!-- <button id="COMPONENT_KNUCKLE_VARMOD_BASE"      name="weapon_knuckle" class="component">Default Variant</button> -->
+				<button id="COMPONENT_KNUCKLE_VARMOD_BALLAS"    name="weapon_knuckle" class="component">Ballas Variant</button>
+				<button id="COMPONENT_KNUCKLE_VARMOD_DIAMOND"   name="weapon_knuckle" class="component">Rock Variant</button>
+				<button id="COMPONENT_KNUCKLE_VARMOD_DOLLAR"    name="weapon_knuckle" class="component">Hustler Variant</button>
+				<button id="COMPONENT_KNUCKLE_VARMOD_HATE"      name="weapon_knuckle" class="component">Hater Variant</button>
+				<button id="COMPONENT_KNUCKLE_VARMOD_KING"      name="weapon_knuckle" class="component">King Variant</button>
+				<button id="COMPONENT_KNUCKLE_VARMOD_LOVE"      name="weapon_knuckle" class="component">Lover Variant</button>
+				<button id="COMPONENT_KNUCKLE_VARMOD_PIMP"      name="weapon_knuckle" class="component">Pimp Variant</button>
+				<button id="COMPONENT_KNUCKLE_VARMOD_PLAYER"    name="weapon_knuckle" class="component">Player Variant</button>
+				<button id="COMPONENT_KNUCKLE_VARMOD_VAGOS"     name="weapon_knuckle" class="component">Vagos Variant</button>
+
+				<!-- <button id="COMPONENT_SWITCHBLADE_VARMOD_BASE"  name="weapon_switchblade" class="component">Default Variant</button> -->
+				<button id="COMPONENT_SWITCHBLADE_VARMOD_VAR1"  name="weapon_switchblade" class="component">VIP Variant</button>
+				<button id="COMPONENT_SWITCHBLADE_VARMOD_VAR2"  name="weapon_switchblade" class="component">Bodyguard Variant</button>
+
+
+				<button id="COMPONENT_AT_PI_FLSH" name="weapon_pistol weapon_appistol weapon_combatpistol weapon_heavypistol weapon_microsmg weapon_revolver_mk2"
+				class="component">Flashlight</button>
+
+				<button id="COMPONENT_AT_PI_SUPP" name="weapon_appistol weapon_combatpistol weapon_heavypistol weapon_vintagepistol weapon_machinepistol weapon_smg weapon_smg_mk2"
+				class="component">Suppressor</button>
+				<button id="COMPONENT_AT_PI_SUPP_02" name="weapon_pistol weapon_pistol_mk2 weapon_snspistol_mk2"
+				class="component">Suppressor</button>
+
+				<!-- <button id="COMPONENT_APPISTOL_CLIP_01"  	name="weapon_appistol" class="component">Default Clip</button> -->
+				<button id="COMPONENT_APPISTOL_CLIP_02"  	name="weapon_appistol" class="component">Extended Clip</button>
+				<button id="COMPONENT_APPISTOL_VARMOD_LUXE" name="weapon_appistol" class="component">Gilded Gun Metal Finish</button>
+
+				<!-- <button id="COMPONENT_COMBATPISTOL_CLIP_01"  		name="weapon_combatpistol" class="component">Default Clip</button> -->
+				<button id="COMPONENT_COMBATPISTOL_CLIP_02"  		name="weapon_combatpistol" class="component">Extended Clip</button>
+				<button id="COMPONENT_COMBATPISTOL_VARMOD_LOWRIDER" name="weapon_combatpistol" class="component">Yusuf Amir Luxury Finish</button>
+
+				<!-- <button id="COMPONENT_HEAVYPISTOL_CLIP_01" 	   name="weapon_heavypistol" class="component">Default Clip</button> -->
+				<button id="COMPONENT_HEAVYPISTOL_CLIP_02" 	   name="weapon_heavypistol" class="component">Extended Clip</button>
+				<button id="COMPONENT_HEAVYPISTOL_VARMOD_LUXE" name="weapon_heavypistol" class="component">Etched Wood Grip Finish</button>
+
+				<!-- <button id="COMPONENT_PISTOL_CLIP_01" 	  name="weapon_pistol" class="component">Default Clip</button> -->
+				<button id="COMPONENT_PISTOL_CLIP_02" 	  name="weapon_pistol" class="component">Extended Clip</button>
+				<button id="COMPONENT_PISTOL_VARMOD_LUXE" name="weapon_pistol" class="component">Yusuf Amir Luxury Finish</button>
+
+				<!-- <button id="COMPONENT_PISTOL50_CLIP_01" 	name="weapon_pistol50" class="component">Default Clip</button> -->
+				<button id="COMPONENT_PISTOL50_CLIP_02" 	name="weapon_pistol50" class="component">Extended Clip</button>
+				<button id="COMPONENT_PISTOL50_VARMOD_LUXE" name="weapon_pistol50" class="component">Platinum Pearl Deluxe Finish</button>
+
+				<button id="COMPONENT_AT_PI_FLSH_02" name="weapon_pistol_mk2" class="component">Flashlight</button>
+				<button id="COMPONENT_AT_PI_COMP" name="weapon_pistol_mk2" class="component">Compensator</button>
+				<button id="COMPONENT_AT_PI_RAIL" name="weapon_pistol_mk2" class="component">Mounted Scope</button>
+				<!-- <button id="COMPONENT_PISTOL_MK2_CLIP_01" 		   name="weapon_pistol_mk2" class="component">Default Clip</button> -->
+				<button id="COMPONENT_PISTOL_MK2_CLIP_02" 		   name="weapon_pistol_mk2" class="component">Extended Clip</button>
+				<button id="COMPONENT_PISTOL_MK2_CLIP_FMJ" 		   name="weapon_pistol_mk2" class="component">Full Metal Jacket Rounds Clip</button>
+				<button id="COMPONENT_PISTOL_MK2_CLIP_HOLLOWPOINT" name="weapon_pistol_mk2" class="component">Hollow Point Rounds Clip</button>
+				<button id="COMPONENT_PISTOL_MK2_CLIP_INCENDIARY"  name="weapon_pistol_mk2" class="component">Incendiary Rounds Clip</button>
+				<button id="COMPONENT_PISTOL_MK2_CLIP_TRACER" 	   name="weapon_pistol_mk2" class="component">Tracer Rounds Clip</button>
+				<button id="COMPONENT_PISTOL_MK2_CAMO" 			   name="weapon_pistol_mk2" class="component">Digital Finish</button>
+				<button id="COMPONENT_PISTOL_MK2_CAMO_02" 		   name="weapon_pistol_mk2" class="component">Brushstroke Finish</button>
+				<button id="COMPONENT_PISTOL_MK2_CAMO_03" 		   name="weapon_pistol_mk2" class="component">Woodland Finish</button>
+				<button id="COMPONENT_PISTOL_MK2_CAMO_04" 		   name="weapon_pistol_mk2" class="component">Skull Finish</button>
+				<button id="COMPONENT_PISTOL_MK2_CAMO_05" 		   name="weapon_pistol_mk2" class="component">Sessanta Nove Finish</button>
+				<button id="COMPONENT_PISTOL_MK2_CAMO_06" 		   name="weapon_pistol_mk2" class="component">Perseus Finish</button>
+				<button id="COMPONENT_PISTOL_MK2_CAMO_07" 		   name="weapon_pistol_mk2" class="component">Leopard Finish</button>
+				<button id="COMPONENT_PISTOL_MK2_CAMO_08" 		   name="weapon_pistol_mk2" class="component">Zebra Finish</button>
+				<button id="COMPONENT_PISTOL_MK2_CAMO_09" 		   name="weapon_pistol_mk2" class="component">Geometric Finish</button>
+				<button id="COMPONENT_PISTOL_MK2_CAMO_10" 		   name="weapon_pistol_mk2" class="component">Boom! Finish</button>
+				<button id="COMPONENT_PISTOL_MK2_CAMO_IND_01" 	   name="weapon_pistol_mk2" class="component">Patriotic Finish</button>
+				<button id="COMPONENT_PISTOL_MK2_CAMO_SLIDE" 		name="weapon_pistol_mk2" class="component">Digital Slide Only Finish</button>
+				<button id="COMPONENT_PISTOL_MK2_CAMO_02_SLIDE" 	name="weapon_pistol_mk2" class="component">Brushstroke Slide Only Finish</button>
+				<button id="COMPONENT_PISTOL_MK2_CAMO_03_SLIDE" 	name="weapon_pistol_mk2" class="component">Woodland Slide Only Finish</button>
+				<button id="COMPONENT_PISTOL_MK2_CAMO_04_SLIDE" 	name="weapon_pistol_mk2" class="component">Skull Slide Only Finish</button>
+				<button id="COMPONENT_PISTOL_MK2_CAMO_05_SLIDE" 	name="weapon_pistol_mk2" class="component">Sessanta Nove Slide Only Finish</button>
+				<button id="COMPONENT_PISTOL_MK2_CAMO_06_SLIDE" 	name="weapon_pistol_mk2" class="component">Perseus Slide Only Finish</button>
+				<button id="COMPONENT_PISTOL_MK2_CAMO_07_SLIDE" 	name="weapon_pistol_mk2" class="component">Leopard Slide Only Finish</button>
+				<button id="COMPONENT_PISTOL_MK2_CAMO_08_SLIDE" 	name="weapon_pistol_mk2" class="component">Zebra Slide Only Finish</button>
+				<button id="COMPONENT_PISTOL_MK2_CAMO_09_SLIDE" 	name="weapon_pistol_mk2" class="component">Geometric Slide Only Finish</button>
+				<button id="COMPONENT_PISTOL_MK2_CAMO_10_SLIDE" 	name="weapon_pistol_mk2" class="component">Boom! Slide Only Finish</button>
+				<button id="COMPONENT_PISTOL_MK2_CAMO_IND_01_SLIDE" name="weapon_pistol_mk2" class="component">Patriotic Slide Only Finish</button>
+
+				<!-- COMPONENT_REVOLVER_CLIP_01 -->
+				<button id="COMPONENT_REVOLVER_VARMOD_BOSS" name="weapon_revolver" class="component">VIP Finish</button>
+				<button id="COMPONENT_REVOLVER_VARMOD_GOON" name="weapon_revolver" class="component">Bodyguard Finish</button>
+
+				<button id="COMPONENT_AT_PI_COMP_03" name="weapon_revolver_mk2" class="component">Compensator</button>
+				<!-- <button id="COMPONENT_REVOLVER_MK2_CLIP_01" name="weapon_revolver_mk2" class="component">Default Clip</button> -->
+				<button id="COMPONENT_REVOLVER_MK2_CLIP_FMJ" name="weapon_revolver_mk2" class="component">Full Metal Jacket Rounds Clip</button>
+				<button id="COMPONENT_REVOLVER_MK2_CLIP_HOLLOWPOINT" name="weapon_revolver_mk2" class="component">Hollow Point Rounds Clip</button>
+				<button id="COMPONENT_REVOLVER_MK2_CLIP_INCENDIARY" name="weapon_revolver_mk2" class="component">Incendiary Rounds Clip</button>
+				<button id="COMPONENT_REVOLVER_MK2_CLIP_TRACER" name="weapon_revolver_mk2" class="component">Tracer Rounds Clip</button>
+				<button id="COMPONENT_REVOLVER_MK2_CAMO" name="weapon_revolver_mk2" class="component">Digital Finish</button>
+				<button id="COMPONENT_REVOLVER_MK2_CAMO_02" name="weapon_revolver_mk2" class="component">Brushstroke Finish</button>
+				<button id="COMPONENT_REVOLVER_MK2_CAMO_03" name="weapon_revolver_mk2" class="component">Woodland Finish</button>
+				<button id="COMPONENT_REVOLVER_MK2_CAMO_04" name="weapon_revolver_mk2" class="component">Skull Finish</button>
+				<button id="COMPONENT_REVOLVER_MK2_CAMO_05" name="weapon_revolver_mk2" class="component">Sessanta Nove Finish</button>
+				<button id="COMPONENT_REVOLVER_MK2_CAMO_06" name="weapon_revolver_mk2" class="component">Perseus Finish</button>
+				<button id="COMPONENT_REVOLVER_MK2_CAMO_07" name="weapon_revolver_mk2" class="component">Leopard Finish</button>
+				<button id="COMPONENT_REVOLVER_MK2_CAMO_08" name="weapon_revolver_mk2" class="component">Zebra Finish</button>
+				<button id="COMPONENT_REVOLVER_MK2_CAMO_09" name="weapon_revolver_mk2" class="component">Geometric Finish</button>
+				<button id="COMPONENT_REVOLVER_MK2_CAMO_10" name="weapon_revolver_mk2" class="component">Boom! Finish</button>
+				<button id="COMPONENT_REVOLVER_MK2_CAMO_IND_01" name="weapon_revolver_mk2" class="component">Patriotic Finish</button>
+
+				<!-- <button id="COMPONENT_SNSPISTOL_CLIP_01" 		 name="weapon_snspistol" class="component">Default Clip</button> -->
+				<button id="COMPONENT_SNSPISTOL_CLIP_02" 		 name="weapon_snspistol" class="component">Extended Clip</button>
+				<button id="COMPONENT_SNSPISTOL_VARMOD_LOWRIDER" name="weapon_snspistol" class="component">Etched Wood Grip Finish</button>
+
+				<button id="COMPONENT_AT_PI_FLSH_03" name="weapon_snspistol_mk2" class="component">Flashlight</button>
+				<button id="COMPONENT_AT_PI_COMP_02" name="weapon_snspistol_mk2" class="component">Compensator</button>
+				<button id="COMPONENT_AT_PI_RAIL_02" name="weapon_snspistol_mk2" class="component">Mounted Scope</button>
+				<!-- <button id="COMPONENT_SNSPISTOL_MK2_CLIP_01" 		   name="weapon_snspistol_mk2" class="component">Default Clip</button> -->
+				<button id="COMPONENT_SNSPISTOL_MK2_CLIP_02" 		   name="weapon_snspistol_mk2" class="component">Extended Clip</button>
+				<button id="COMPONENT_SNSPISTOL_MK2_CLIP_FMJ" 		   name="weapon_snspistol_mk2" class="component">Full Metal Jacket Rounds Clip</button>
+				<button id="COMPONENT_SNSPISTOL_MK2_CLIP_HOLLOWPOINT" name="weapon_snspistol_mk2" class="component">Hollow Point Rounds Clip</button>
+				<button id="COMPONENT_SNSPISTOL_MK2_CLIP_INCENDIARY"  name="weapon_snspistol_mk2" class="component">Incendiary Rounds Clip</button>
+				<button id="COMPONENT_SNSPISTOL_MK2_CLIP_TRACER" 	   name="weapon_snspistol_mk2" class="component">Tracer Rounds Clip</button>
+				<button id="COMPONENT_SNSPISTOL_MK2_CAMO" 	 name="weapon_snspistol_mk2" class="component">Digital Finish</button>
+				<button id="COMPONENT_SNSPISTOL_MK2_CAMO_02" name="weapon_snspistol_mk2" class="component">Brushstroke Finish</button>
+				<button id="COMPONENT_SNSPISTOL_MK2_CAMO_03" name="weapon_snspistol_mk2" class="component">Woodland Finish</button>
+				<button id="COMPONENT_SNSPISTOL_MK2_CAMO_04" name="weapon_snspistol_mk2" class="component">Skull Finish</button>
+				<button id="COMPONENT_SNSPISTOL_MK2_CAMO_05" name="weapon_snspistol_mk2" class="component">Sessanta Nove Finish</button>
+				<button id="COMPONENT_SNSPISTOL_MK2_CAMO_06" name="weapon_snspistol_mk2" class="component">Perseus Finish</button>
+				<button id="COMPONENT_SNSPISTOL_MK2_CAMO_07" name="weapon_snspistol_mk2" class="component">Leopard Finish</button>
+				<button id="COMPONENT_SNSPISTOL_MK2_CAMO_08" name="weapon_snspistol_mk2" class="component">Zebra Finish</button>
+				<button id="COMPONENT_SNSPISTOL_MK2_CAMO_09" name="weapon_snspistol_mk2" class="component">Geometric Finish</button>
+				<button id="COMPONENT_SNSPISTOL_MK2_CAMO_10" name="weapon_snspistol_mk2" class="component">Boom! Finish</button>
+				<button id="COMPONENT_SNSPISTOL_MK2_CAMO_IND_01" name="weapon_snspistol_mk2" class="component">Patriotic Finish</button>
+				<button id="COMPONENT_SNSPISTOL_MK2_CAMO_SLIDE" 	   name="weapon_snspistol_mk2" class="component">Digital Slide Only Finish</button>
+				<button id="COMPONENT_SNSPISTOL_MK2_CAMO_02_SLIDE"     name="weapon_snspistol_mk2" class="component">Brushstroke Slide Only Finish</button>
+				<button id="COMPONENT_SNSPISTOL_MK2_CAMO_03_SLIDE"     name="weapon_snspistol_mk2" class="component">Woodland Slide Only Finish</button>
+				<button id="COMPONENT_SNSPISTOL_MK2_CAMO_04_SLIDE"     name="weapon_snspistol_mk2" class="component">Skull Slide Only Finish</button>
+				<button id="COMPONENT_SNSPISTOL_MK2_CAMO_05_SLIDE"     name="weapon_snspistol_mk2" class="component">Sessanta Nove Slide Only Finish</button>
+				<button id="COMPONENT_SNSPISTOL_MK2_CAMO_06_SLIDE"     name="weapon_snspistol_mk2" class="component">Perseus Slide Only Finish</button>
+				<button id="COMPONENT_SNSPISTOL_MK2_CAMO_0_SLIDE7"     name="weapon_snspistol_mk2" class="component">Leopard Slide Only Finish</button>
+				<button id="COMPONENT_SNSPISTOL_MK2_CAMO_08_SLIDE"     name="weapon_snspistol_mk2" class="component">Zebra Slide Only Finish</button>
+				<button id="COMPONENT_SNSPISTOL_MK2_CAMO_09_SLIDE"     name="weapon_snspistol_mk2" class="component">Geometric Slide Only Finish</button>
+				<button id="COMPONENT_SNSPISTOL_MK2_CAMO_10_SLIDE"     name="weapon_snspistol_mk2" class="component">Boom! Slide Only Finish</button>
+				<button id="COMPONENT_SNSPISTOL_MK2_CAMO_IND_01_SLIDE" name="weapon_snspistol_mk2" class="component">Patriotic Slide Only Finish</button>
+
+				<!-- <button id="COMPONENT_VINTAGEPISTOL_CLIP_01" name="weapon_vintagepistol" class="component">Default Clip</button> -->
+				<button id="COMPONENT_VINTAGEPISTOL_CLIP_02" name="weapon_vintagepistol" class="component">Extended Clip</button>
+
+				<button id="COMPONENT_RAYPISTOL_VARMOD_XMAS18" name="weapon_raypistol" class="component">Festive Finish</button>
+
+
+				<button id="COMPONENT_AT_SCOPE_MACRO" name="weapon_assaultsmg weapon_microsmg weapon_assaultrifle"
+				class="component">Macro Scope</button>
+
+				<button id="COMPONENT_AT_SCOPE_MACRO_MK2" name="weapon_assaultrifle_mk2 weapon_carbinerifle_mk2 weapon_specialcarbine_mk2 weapon_pumpshotgun_mk2 weapon_revolver_mk2"
+				class="component">Macro Scope</button>
+				
+				<button id="COMPONENT_AT_SCOPE_MEDIUM" name="weapon_combatmg weapon_carbinerifle weapon_specialcarbine"
+				class="component">Medium Scope</button>
+				<button id="COMPONENT_AT_SCOPE_MEDIUM_MK2" name="weapon_combatmg_mk2 weapon_assaultrifle_mk2 weapon_carbinerifle_mk2 weapon_specialcarbine_mk2 weapon_marksmanrifle_mk2"
+				class="component">Medium Scope</button>
+
+				<button id="COMPONENT_AT_SCOPE_SMALL" name="weapon_combatpdw weapon_advancedrifle weapon_bullpuprifle weapon_grenadelauncher"
+				class="component">Small Scope</button>
+				<button id="COMPONENT_AT_SCOPE_SMALL_MK2" name="weapon_combatmg_mk2 weapon_bullpuprifle_mk2 weapon_pumpshotgun_mk2"
+				class="component">Small Scope</button>
+
+				<button id="COMPONENT_AT_SIGHTS" name="weapon_combatmg_mk2 weapon_assaultrifle_mk2 weapon_bullpuprifle_mk2 weapon_carbinerifle_mk2 weapon_specialcarbine_mk2 weapon_marksmanrifle_mk2 weapon_pumpshotgun_mk2 weapon_revolver_mk2"
+				class="component">Holographic Sight</button>
+
+				<button id="COMPONENT_AT_AR_FLSH" name="weapon_assaultsmg weapon_combatpdw weapon_smg weapon_smg_mk2 weapon_advancedrifle weapon_assaultrifle weapon_assaultrifle_mk2 weapon_bullpuprifle weapon_bullpuprifle_mk2 weapon_carbinerifle weapon_carbinerifle_mk2 weapon_specialcarbine weapon_specialcarbine_mk2 weapon_marksmanrifle weapon_marksmanrifle_mk2 weapon_assaultshotgun weapon_bullpupshotgun weapon_heavyshotgun weapon_pumpshotgun weapon_pumpshotgun_mk2 weapon_grenadelauncher"
+				class="component">Flashlight</button>
+
+				<button id="COMPONENT_AT_AR_SUPP" name="weapon_advancedrifle weapon_bullpuprifle weapon_bullpuprifle_mk2 weapon_carbinerifle weapon_carbinerifle_mk2 weapon_marksmanrifle weapon_marksmanrifle_mk2 weapon_assaultshotgun"
+				class="component">Suppressor</button>
+				<button id="COMPONENT_AT_AR_SUPP_02" name="weapon_pistol50 weapon_assaultsmg weapon_microsmg weapon_assaultrifle weapon_assaultrifle_mk2 weapon_specialcarbine weapon_specialcarbine_mk2 weapon_sniperrifle weapon_bullpupshotgun weapon_heavyshotgun"
+				class="component">Suppressor</button>
+
+				<button id="COMPONENT_AT_AR_AFGRIP" name="weapon_combatmg weapon_combatpdw weapon_assaultrifle weapon_bullpuprifle weapon_carbinerifle weapon_specialcarbine weapon_marksmanrifle weapon_assaultshotgun weapon_bullpupshotgun weapon_heavyshotgun weapon_grenadelauncher"
+				class="component">Grip</button> 
+				<button id="COMPONENT_AT_AR_AFGRIP_02" name="weapon_combatmg_mk2 weapon_assaultrifle_mk2 weapon_bullpuprifle_mk2 weapon_carbinerifle_mk2 weapon_specialcarbine_mk2 weapon_marksmanrifle_mk2"
+				class="component">Grip</button>
+
+				<button id="COMPONENT_AT_MUZZLE_01" name="weapon_combatmg_mk2 weapon_smg_mk2 weapon_assaultrifle_mk2 weapon_bullpuprifle_mk2 weapon_carbinerifle_mk2 weapon_marksmanrifle_mk2"
+				class="component">Flat Muzzle Brake</button>
+				<button id="COMPONENT_AT_MUZZLE_02" name="weapon_combatmg_mk2 weapon_smg_mk2 weapon_assaultrifle_mk2 weapon_bullpuprifle_mk2 weapon_carbinerifle_mk2 weapon_marksmanrifle_mk2"
+				class="component">Tactical Muzzle Brake</button>
+				<button id="COMPONENT_AT_MUZZLE_03" name="weapon_combatmg_mk2 weapon_smg_mk2 weapon_assaultrifle_mk2 weapon_bullpuprifle_mk2 weapon_carbinerifle_mk2 weapon_marksmanrifle_mk2"
+				class="component">Fat-End Muzzle Brake</button>
+				<button id="COMPONENT_AT_MUZZLE_04" name="weapon_combatmg_mk2 weapon_smg_mk2 weapon_assaultrifle_mk2 weapon_bullpuprifle_mk2 weapon_carbinerifle_mk2 weapon_marksmanrifle_mk2"
+				class="component">Precision Muzzle Brake</button>
+				<button id="COMPONENT_AT_MUZZLE_05" name="weapon_combatmg_mk2 weapon_smg_mk2 weapon_assaultrifle_mk2 weapon_bullpuprifle_mk2 weapon_carbinerifle_mk2 weapon_marksmanrifle_mk2"
+				class="component">Heavy Duty Muzzle Brake</button>
+				<button id="COMPONENT_AT_MUZZLE_06" name="weapon_combatmg_mk2 weapon_smg_mk2 weapon_assaultrifle_mk2 weapon_bullpuprifle_mk2 weapon_carbinerifle_mk2 weapon_marksmanrifle_mk2"
+				class="component">Slanted Muzzle Brake</button>
+				<button id="COMPONENT_AT_MUZZLE_07" name="weapon_combatmg_mk2 weapon_smg_mk2 weapon_assaultrifle_mk2 weapon_bullpuprifle_mk2 weapon_carbinerifle_mk2 weapon_marksmanrifle_mk2"
+				class="component">Split-End Muzzle Brake</button>
+
+
+				<!-- <button id="COMPONENT_ASSAULTSMG_CLIP_01" name="weapon_assaultsmg" class="component">Default Clip</button> -->
+				<button id="COMPONENT_ASSAULTSMG_CLIP_02" name="weapon_assaultsmg" class="component">Extended Clip</button>
+				<button id="COMPONENT_ASSAULTSMG_VARMOD_LOWRIDER" name="weapon_assaultsmg" class="component">Yusuf Amir Luxury Finish</button>
+
+				<!-- <button id="COMPONENT_COMBATMG_CLIP_01" name="weapon_combatmg" class="component">Default Clip</button> -->
+				<button id="COMPONENT_COMBATMG_CLIP_02" name="weapon_combatmg" class="component">Extended Clip</button>
+				<button id="COMPONENT_COMBATMG_VARMOD_LOWRIDER" name="weapon_combatmg" class="component">Etched Gun Metal Finish</button>
+
+				<!-- <button id="COMPONENT_COMBATMG_MK2_CLIP_01" name="weapon_combatmg_mk2" class="component">Default Clip</button> -->
+				<button id="COMPONENT_COMBATMG_MK2_CLIP_02" name="weapon_combatmg_mk2" class="component">Extended Clip</button>
+				<button id="COMPONENT_COMBATMG_MK2_CLIP_ARMORPIERCING" name="weapon_combatmg_mk2" class="component">Armor Piercing Rounds Clip</button>
+				<button id="COMPONENT_COMBATMG_MK2_CLIP_FMJ" name="weapon_combatmg_mk2" class="component">Full Metal Jacket Rounds Clip</button>
+				<button id="COMPONENT_COMBATMG_MK2_CLIP_INCENDIARY" name="weapon_combatmg_mk2" class="component">Incendiary Rounds Clip</button>
+				<button id="COMPONENT_COMBATMG_MK2_CLIP_TRACER" name="weapon_combatmg_mk2" class="component">Tracer Rounds Clip</button>
+				<!-- <button id="COMPONENT_AT_MG_BARREL_01" name="weapon_combatmg_mk2" class="component">Default Barrel</button> -->
+				<button id="COMPONENT_AT_MG_BARREL_02" name="weapon_combatmg_mk2" class="component">Heavy Barrel</button>
+				<button id="COMPONENT_COMBATMG_MK2_CAMO"    name="weapon_combatmg_mk2" class="component">Digital Finish</button>
+				<button id="COMPONENT_COMBATMG_MK2_CAMO_02" name="weapon_combatmg_mk2" class="component">Brushstroke Finish</button>
+				<button id="COMPONENT_COMBATMG_MK2_CAMO_03" name="weapon_combatmg_mk2" class="component">Woodland Finish</button>
+				<button id="COMPONENT_COMBATMG_MK2_CAMO_04" name="weapon_combatmg_mk2" class="component">Skull Finish</button>
+				<button id="COMPONENT_COMBATMG_MK2_CAMO_05" name="weapon_combatmg_mk2" class="component">Sessanta Nove Finish</button>
+				<button id="COMPONENT_COMBATMG_MK2_CAMO_06" name="weapon_combatmg_mk2" class="component">Perseus Finish</button>
+				<button id="COMPONENT_COMBATMG_MK2_CAMO_07" name="weapon_combatmg_mk2" class="component">Leopard Finish</button>
+				<button id="COMPONENT_COMBATMG_MK2_CAMO_08" name="weapon_combatmg_mk2" class="component">Zebra Finish</button>
+				<button id="COMPONENT_COMBATMG_MK2_CAMO_09" name="weapon_combatmg_mk2" class="component">Geometric Finish</button>
+				<button id="COMPONENT_COMBATMG_MK2_CAMO_10" name="weapon_combatmg_mk2" class="component">Boom! Finish</button>
+				<button id="COMPONENT_COMBATMG_MK2_CAMO_IND_01" name="weapon_combatmg_mk2" class="component">Patriotic Finish</button>
+
+				<!-- <button id="COMPONENT_COMBATPDW_CLIP_01" name="weapon_combatpdw" class="component">Default Clip</button> -->
+				<button id="COMPONENT_COMBATPDW_CLIP_02" name="weapon_combatpdw" class="component">Extended Clip</button>
+				<button id="COMPONENT_COMBATPDW_CLIP_03" name="weapon_combatpdw" class="component">Drum Clip</button>
+
+				<!-- <button id="COMPONENT_GUSENBERG_CLIP_01" name="weapon_gusenberg" class="component">Default Clip</button> -->
+				<button id="COMPONENT_GUSENBERG_CLIP_02" name="weapon_gusenberg" class="component">Extended Clip</button>
+
+				<!-- <button id="COMPONENT_MACHINEPISTOL_CLIP_01" name="weapon_machinepistol" class="component">Default Clip</button> -->
+				<button id="COMPONENT_MACHINEPISTOL_CLIP_02" name="weapon_machinepistol" class="component">Extended Clip</button>
+				<button id="COMPONENT_MACHINEPISTOL_CLIP_03" name="weapon_machinepistol" class="component">Drum Clip</button>
+
+				<!-- <button id="COMPONENT_MG_CLIP_01" name="weapon_mg" class="component">Default Clip</button> -->
+				<button id="COMPONENT_MG_CLIP_02" name="weapon_mg" class="component">Extended Clip</button>
+				<button id="COMPONENT_AT_SCOPE_SMALL_02" name="weapon_mg" class="component">Small Scope</button>
+				<button id="COMPONENT_MG_VARMOD_LOWRIDER" name="weapon_mg" class="component">Yusuf Amir Luxury Finish</button>
+
+				<!-- <button id="COMPONENT_MICROSMG_CLIP_01" name="weapon_microsmg" class="component">Default Clip</button> -->
+				<button id="COMPONENT_MICROSMG_CLIP_02" name="weapon_microsmg" class="component">Extended Clip</button>
+				<button id="COMPONENT_MICROSMG_VARMOD_LUXE" name="weapon_microsmg" class="component">Yusuf Amir Luxury Finish</button>
+
+				<!-- <button id="COMPONENT_MINISMG_CLIP_01" name="weapon_minismg" class="component">Default Clip</button> -->
+				<button id="COMPONENT_MINISMG_CLIP_02" name="weapon_minismg" class="component">Extended Clip</button>
+
+				<!-- <button id="COMPONENT_SMG_CLIP_01" name="weapon_smg" class="component">Default Clip</button> -->
+				<button id="COMPONENT_SMG_CLIP_02" name="weapon_smg" class="component">Extended Clip</button>
+				<button id="COMPONENT_SMG_CLIP_03" name="weapon_smg" class="component">Drum Clip</button>
+				<button id="COMPONENT_SMG_VARMOD_LUXE" name="weapon_smg" class="component">Yusuf Amir Luxury Finish</button>
+				<button id="COMPONENT_AT_SCOPE_MACRO_02" name="weapon_smg" class="component">Macro Scope</button>
+
+				<!-- <button id="COMPONENT_SMG_MK2_CLIP_01" name="weapon_smg_mk2" class="component">Default Clip</button> -->
+				<button id="COMPONENT_SMG_MK2_CLIP_02" name="weapon_smg_mk2" class="component">Extended Clip</button>
+				<button id="COMPONENT_SMG_MK2_CLIP_FMJ" name="weapon_smg_mk2" class="component">Full Metal Jacket Rounds Clip</button>
+				<button id="COMPONENT_SMG_MK2_CLIP_HOLLOWPOINT" name="weapon_smg_mk2" class="component">Hollow Point Rounds Clip</button>
+				<button id="COMPONENT_SMG_MK2_CLIP_INCENDIARY" name="weapon_smg_mk2" class="component">Incendiary Rounds Clip</button>
+				<button id="COMPONENT_SMG_MK2_CLIP_TRACER" name="weapon_smg_mk2" class="component">Tracer Rounds Clip</button>
+
+				<!-- <button id="COMPONENT_AT_SB_BARREL_01" name="weapon_smg_mk2" class="component">Default Barrel</button> -->
+				<button id="COMPONENT_AT_SB_BARREL_02" name="weapon_smg_mk2" class="component">Heavy Barrel</button>
+
+				<button id="COMPONENT_AT_SCOPE_MACRO_02_SMG_MK2" name="weapon_smg_mk2" class="component">Macro Scope</button>
+				<button id="COMPONENT_AT_SCOPE_SMALL_SMG_MK2" name="weapon_smg_mk2" class="component">Small Scope</button>
+				<button id="COMPONENT_AT_SIGHTS_SMG" name="weapon_smg_mk2" class="component">Holographic Sight</button>
+				
+				<button id="COMPONENT_SMG_MK2_CAMO"    name="weapon_smg_mk2" class="component">Digital Finish</button>
+				<button id="COMPONENT_SMG_MK2_CAMO_02" name="weapon_smg_mk2" class="component">Brushstroke Finish</button>
+				<button id="COMPONENT_SMG_MK2_CAMO_03" name="weapon_smg_mk2" class="component">Woodland Finish</button>
+				<button id="COMPONENT_SMG_MK2_CAMO_04" name="weapon_smg_mk2" class="component">Skull Finish</button>
+				<button id="COMPONENT_SMG_MK2_CAMO_05" name="weapon_smg_mk2" class="component">Sessanta Nove Finish</button>
+				<button id="COMPONENT_SMG_MK2_CAMO_06" name="weapon_smg_mk2" class="component">Perseus Finish</button>
+				<button id="COMPONENT_SMG_MK2_CAMO_07" name="weapon_smg_mk2" class="component">Leopard Finish</button>
+				<button id="COMPONENT_SMG_MK2_CAMO_08" name="weapon_smg_mk2" class="component">Zebra Finish</button>
+				<button id="COMPONENT_SMG_MK2_CAMO_09" name="weapon_smg_mk2" class="component">Geometric Finish</button>
+				<button id="COMPONENT_SMG_MK2_CAMO_10" name="weapon_smg_mk2" class="component">Boom! Finish</button>
+				<button id="COMPONENT_SMG_MK2_CAMO_IND_01" name="weapon_smg_mk2" class="component">Patriotic Finish</button>
+
+				<!-- <button id="COMPONENT_ADVANCEDRIFLE_CLIP_01" name="weapon_advancedrifle" class="component">Default Clip</button> -->
+				<button id="COMPONENT_ADVANCEDRIFLE_CLIP_02" name="weapon_advancedrifle" class="component">Extended Clip</button>
+				<button id="COMPONENT_ADVANCEDRIFLE_VARMOD_LUXE" name="weapon_advancedrifle" class="component">Gilded Gun Metal Finish</button>
+
+				<!-- <button id="COMPONENT_ASSAULTRIFLE_CLIP_01" name="weapon_assaultrifle" class="component">Default Clip</button> -->
+				<button id="COMPONENT_ASSAULTRIFLE_CLIP_02" name="weapon_assaultrifle" class="component">Extended Clip</button>
+				<button id="COMPONENT_ASSAULTRIFLE_CLIP_03" name="weapon_assaultrifle" class="component">Drum Clip</button>
+				<button id="COMPONENT_ASSAULTRIFLE_VARMOD_LUXE" name="weapon_assaultrifle" class="component">Yusuf Amir Luxury Finish</button>
+
+				<!-- <button id="COMPONENT_ASSAULTRIFLE_MK2_CLIP_01" name="weapon_assaultrifle_mk2" class="component">Default Clip</button> -->
+				<button id="COMPONENT_ASSAULTRIFLE_MK2_CLIP_02" name="weapon_assaultrifle_mk2" class="component">Extended Clip</button>
+				<button id="COMPONENT_ASSAULTRIFLE_MK2_CLIP_ARMORPIERCING" name="weapon_assaultrifle_mk2" class="component">Armor Piercing Rounds Clip</button>
+				<button id="COMPONENT_ASSAULTRIFLE_MK2_CLIP_FMJ" name="weapon_assaultrifle_mk2" class="component">Full Metal Jacket Rounds Clip</button>
+				<button id="COMPONENT_ASSAULTRIFLE_MK2_CLIP_INCENDIARY" name="weapon_assaultrifle_mk2" class="component">Incendiary Rounds Clip</button>
+				<button id="COMPONENT_ASSAULTRIFLE_MK2_CLIP_TRACER" name="weapon_assaultrifle_mk2" class="component">Tracer Rounds Clip</button>
+				<!-- <button id="COMPONENT_AT_AR_BARREL_01" name="weapon_assaultrifle_mk2" class="component">Default Barrel</button> -->
+				<button id="COMPONENT_AT_AR_BARREL_02" name="weapon_assaultrifle_mk2" class="component">Heavy Barrel</button>
+				<button id="COMPONENT_ASSAULTRIFLE_MK2_CAMO"    name="weapon_assaultrifle_mk2" class="component">Digital Finish</button>
+				<button id="COMPONENT_ASSAULTRIFLE_MK2_CAMO_02" name="weapon_assaultrifle_mk2" class="component">Brushstroke Finish</button>
+				<button id="COMPONENT_ASSAULTRIFLE_MK2_CAMO_03" name="weapon_assaultrifle_mk2" class="component">Woodland Finish</button>
+				<button id="COMPONENT_ASSAULTRIFLE_MK2_CAMO_04" name="weapon_assaultrifle_mk2" class="component">Skull Finish</button>
+				<button id="COMPONENT_ASSAULTRIFLE_MK2_CAMO_05" name="weapon_assaultrifle_mk2" class="component">Sessanta Nove Finish</button>
+				<button id="COMPONENT_ASSAULTRIFLE_MK2_CAMO_06" name="weapon_assaultrifle_mk2" class="component">Perseus Finish</button>
+				<button id="COMPONENT_ASSAULTRIFLE_MK2_CAMO_07" name="weapon_assaultrifle_mk2" class="component">Leopard Finish</button>
+				<button id="COMPONENT_ASSAULTRIFLE_MK2_CAMO_08" name="weapon_assaultrifle_mk2" class="component">Zebra Finish</button>
+				<button id="COMPONENT_ASSAULTRIFLE_MK2_CAMO_09" name="weapon_assaultrifle_mk2" class="component">Geometric Finish</button>
+				<button id="COMPONENT_ASSAULTRIFLE_MK2_CAMO_10" name="weapon_assaultrifle_mk2" class="component">Boom! Finish</button>
+				<button id="COMPONENT_ASSAULTRIFLE_MK2_CAMO_IND_01" name="weapon_assaultrifle_mk2" class="component">Patriotic Finish</button>
+
+				<!-- <button id="COMPONENT_BULLPUPRIFLE_CLIP_01" name="weapon_bullpuprifle" class="component">Default Clip</button> -->
+				<button id="COMPONENT_BULLPUPRIFLE_CLIP_02" name="weapon_bullpuprifle" class="component">Extended Clip</button>
+				<button id="COMPONENT_BULLPUPRIFLE_VARMOD_LOW" name="weapon_bullpuprifle" class="component">Gilded Gun Metal Finish</button>
+
+				<!-- <button id="COMPONENT_BULLPUPRIFLE_MK2_CLIP_01" name="weapon_bullpuprifle_mk2" class="component">Default Clip</button> -->
+				<button id="COMPONENT_BULLPUPRIFLE_MK2_CLIP_02" name="weapon_bullpuprifle_mk2" class="component">Extended Clip</button>
+				<button id="COMPONENT_BULLPUPRIFLE_MK2_CLIP_ARMORPIERCING" name="weapon_bullpuprifle_mk2" class="component">Armor Piercing Rounds Clip</button>
+				<button id="COMPONENT_BULLPUPRIFLE_MK2_CLIP_FMJ" name="weapon_bullpuprifle_mk2" class="component">Full Metal Jacket Rounds Clip</button>
+				<button id="COMPONENT_BULLPUPRIFLE_MK2_CLIP_INCENDIARY" name="weapon_bullpuprifle_mk2" class="component">Incendiary Rounds Clip</button>
+				<button id="COMPONENT_BULLPUPRIFLE_MK2_CLIP_TRACER" name="weapon_bullpuprifle_mk2" class="component">Tracer Rounds Clip</button>
+				<!-- <button id="COMPONENT_AT_BP_BARREL_01" name="weapon_bullpuprifle_mk2" class="component">Default Barrel</button> -->
+				<button id="COMPONENT_AT_BP_BARREL_02" name="weapon_bullpuprifle_mk2" class="component">Heavy Barrel</button>
+				<button id="COMPONENT_AT_SCOPE_MACRO_02_MK2" name="weapon_bullpuprifle_mk2" class="component">Macro Scope</button>
+				<button id="COMPONENT_BULLPUPRIFLE_MK2_CAMO"    name="weapon_bullpuprifle_mk2" class="component">Digital Finish</button>
+				<button id="COMPONENT_BULLPUPRIFLE_MK2_CAMO_02" name="weapon_bullpuprifle_mk2" class="component">Brushstroke Finish</button>
+				<button id="COMPONENT_BULLPUPRIFLE_MK2_CAMO_03" name="weapon_bullpuprifle_mk2" class="component">Woodland Finish</button>
+				<button id="COMPONENT_BULLPUPRIFLE_MK2_CAMO_04" name="weapon_bullpuprifle_mk2" class="component">Skull Finish</button>
+				<button id="COMPONENT_BULLPUPRIFLE_MK2_CAMO_05" name="weapon_bullpuprifle_mk2" class="component">Sessanta Nove Finish</button>
+				<button id="COMPONENT_BULLPUPRIFLE_MK2_CAMO_06" name="weapon_bullpuprifle_mk2" class="component">Perseus Finish</button>
+				<button id="COMPONENT_BULLPUPRIFLE_MK2_CAMO_07" name="weapon_bullpuprifle_mk2" class="component">Leopard Finish</button>
+				<button id="COMPONENT_BULLPUPRIFLE_MK2_CAMO_08" name="weapon_bullpuprifle_mk2" class="component">Zebra Finish</button>
+				<button id="COMPONENT_BULLPUPRIFLE_MK2_CAMO_09" name="weapon_bullpuprifle_mk2" class="component">Geometric Finish</button>
+				<button id="COMPONENT_BULLPUPRIFLE_MK2_CAMO_10" name="weapon_bullpuprifle_mk2" class="component">Boom! Finish</button>
+				<button id="COMPONENT_BULLPUPRIFLE_MK2_CAMO_IND_01" name="weapon_bullpuprifle_mk2" class="component">Patriotic Finish</button>
+
+				<!-- <button id="COMPONENT_CARBINERIFLE_CLIP_01" name="weapon_carbinerifle" class="component">Default Clip</button> -->
+				<button id="COMPONENT_CARBINERIFLE_CLIP_02" name="weapon_carbinerifle" class="component">Extended Clip</button>
+				<button id="COMPONENT_CARBINERIFLE_CLIP_03" name="weapon_carbinerifle" class="component">Drum Clip</button>
+				<button id="COMPONENT_CARBINERIFLE_VARMOD_LUXE" name="weapon_carbinerifle" class="component">Yusuf Amir Luxury Finish</button>
+
+				<!-- <button id="COMPONENT_CARBINERIFLE_MK2_CLIP_01" name="weapon_carbinerifle_mk2" class="component">Default Clip</button> -->
+				<button id="COMPONENT_CARBINERIFLE_MK2_CLIP_02" name="weapon_carbinerifle_mk2" class="component">Extended Clip</button>
+				<button id="COMPONENT_CARBINERIFLE_MK2_CLIP_ARMORPIERCING" name="weapon_carbinerifle_mk2" class="component">Armor Piercing Rounds Clip</button>
+				<button id="COMPONENT_CARBINERIFLE_MK2_CLIP_FMJ" name="weapon_carbinerifle_mk2" class="component">Full Metal Jacket Rounds Clip</button>
+				<button id="COMPONENT_CARBINERIFLE_MK2_CLIP_INCENDIARY" name="weapon_carbinerifle_mk2" class="component">Incendiary Rounds Clip</button>
+				<button id="COMPONENT_CARBINERIFLE_MK2_CLIP_TRACER" name="weapon_carbinerifle_mk2" class="component">Tracer Rounds Clip</button>
+				<!-- <button id="COMPONENT_AT_CR_BARREL_01" name="weapon_carbinerifle_mk2" class="component">Default Barrel</button> -->
+				<button id="COMPONENT_AT_CR_BARREL_02" name="weapon_carbinerifle_mk2" class="component">Heavy Barrel</button>
+				<button id="COMPONENT_CARBINERIFLE_MK2_CAMO"    name="weapon_carbinerifle_mk2" class="component">Digital Finish</button>
+				<button id="COMPONENT_CARBINERIFLE_MK2_CAMO_02" name="weapon_carbinerifle_mk2" class="component">Brushstroke Finish</button>
+				<button id="COMPONENT_CARBINERIFLE_MK2_CAMO_03" name="weapon_carbinerifle_mk2" class="component">Woodland Finish</button>
+				<button id="COMPONENT_CARBINERIFLE_MK2_CAMO_04" name="weapon_carbinerifle_mk2" class="component">Skull Finish</button>
+				<button id="COMPONENT_CARBINERIFLE_MK2_CAMO_05" name="weapon_carbinerifle_mk2" class="component">Sessanta Nove Finish</button>
+				<button id="COMPONENT_CARBINERIFLE_MK2_CAMO_06" name="weapon_carbinerifle_mk2" class="component">Perseus Finish</button>
+				<button id="COMPONENT_CARBINERIFLE_MK2_CAMO_07" name="weapon_carbinerifle_mk2" class="component">Leopard Finish</button>
+				<button id="COMPONENT_CARBINERIFLE_MK2_CAMO_08" name="weapon_carbinerifle_mk2" class="component">Zebra Finish</button>
+				<button id="COMPONENT_CARBINERIFLE_MK2_CAMO_09" name="weapon_carbinerifle_mk2" class="component">Geometric Finish</button>
+				<button id="COMPONENT_CARBINERIFLE_MK2_CAMO_10" name="weapon_carbinerifle_mk2" class="component">Boom! Finish</button>
+				<button id="COMPONENT_CARBINERIFLE_MK2_CAMO_IND_01" name="weapon_carbinerifle_mk2" class="component">Patriotic Finish</button>
+
+				<!-- <button id="COMPONENT_COMPACTRIFLE_CLIP_01" name="weapon_compactrifle" class="component">Default Clip</button> -->
+				<button id="COMPONENT_COMPACTRIFLE_CLIP_02" name="weapon_compactrifle" class="component">Extended Clip</button>
+				<button id="COMPONENT_COMPACTRIFLE_CLIP_03" name="weapon_compactrifle" class="component">Drum Clip</button>
+
+				<!-- <button id="COMPONENT_SPECIALCARBINE_CLIP_01" name="weapon_specialcarbine" class="component">Default Clip</button> -->
+				<button id="COMPONENT_SPECIALCARBINE_CLIP_02" name="weapon_specialcarbine" class="component">Extended Clip</button>
+				<button id="COMPONENT_SPECIALCARBINE_CLIP_03" name="weapon_specialcarbine" class="component">Drum Clip</button>
+				<button id="COMPONENT_SPECIALCARBINE_VARMOD_LOWRIDER" name="weapon_specialcarbine" class="component">Etched Gun Metal Finish</button>
+
+				<!-- <button id="COMPONENT_SPECIALCARBINE_MK2_CLIP_01" name="weapon_specialcarbine_mk2" class="component">Default Clip</button> -->
+				<button id="COMPONENT_SPECIALCARBINE_MK2_CLIP_02" name="weapon_specialcarbine_mk2" class="component">Extended Clip</button>
+				<button id="COMPONENT_SPECIALCARBINE_MK2_CLIP_ARMORPIERCING" name="weapon_specialcarbine_mk2" class="component">Armor Piercing Rounds Clip</button>
+				<button id="COMPONENT_SPECIALCARBINE_MK2_CLIP_FMJ" name="weapon_specialcarbine_mk2" class="component">Full Metal Jacket Rounds Clip</button>
+				<button id="COMPONENT_SPECIALCARBINE_MK2_CLIP_INCENDIARY" name="weapon_specialcarbine_mk2" class="component">Incendiary Rounds Clip</button>
+				<button id="COMPONENT_SPECIALCARBINE_MK2_CLIP_TRACER" name="weapon_specialcarbine_mk2" class="component">Tracer Rounds Clip</button>
+				<!-- <button id="COMPONENT_AT_SC_BARREL_01" name="weapon_specialcarbine_mk2" class="component">Default Barrel</button> -->
+				<button id="COMPONENT_AT_SC_BARREL_02" name="weapon_specialcarbine_mk2" class="component">Heavy Barrel</button>
+				<button id="COMPONENT_SPECIALCARBINE_MK2_CAMO"    name="weapon_specialcarbine_mk2" class="component">Digital Finish</button>
+				<button id="COMPONENT_SPECIALCARBINE_MK2_CAMO_02" name="weapon_specialcarbine_mk2" class="component">Brushstroke Finish</button>
+				<button id="COMPONENT_SPECIALCARBINE_MK2_CAMO_03" name="weapon_specialcarbine_mk2" class="component">Woodland Finish</button>
+				<button id="COMPONENT_SPECIALCARBINE_MK2_CAMO_04" name="weapon_specialcarbine_mk2" class="component">Skull Finish</button>
+				<button id="COMPONENT_SPECIALCARBINE_MK2_CAMO_05" name="weapon_specialcarbine_mk2" class="component">Sessanta Nove Finish</button>
+				<button id="COMPONENT_SPECIALCARBINE_MK2_CAMO_06" name="weapon_specialcarbine_mk2" class="component">Perseus Finish</button>
+				<button id="COMPONENT_SPECIALCARBINE_MK2_CAMO_07" name="weapon_specialcarbine_mk2" class="component">Leopard Finish</button>
+				<button id="COMPONENT_SPECIALCARBINE_MK2_CAMO_08" name="weapon_specialcarbine_mk2" class="component">Zebra Finish</button>
+				<button id="COMPONENT_SPECIALCARBINE_MK2_CAMO_09" name="weapon_specialcarbine_mk2" class="component">Geometric Finish</button>
+				<button id="COMPONENT_SPECIALCARBINE_MK2_CAMO_10" name="weapon_specialcarbine_mk2" class="component">Boom! Finish</button>
+				<button id="COMPONENT_SPECIALCARBINE_MK2_CAMO_IND_01" name="weapon_specialcarbine_mk2" class="component">Patriotic Finish</button>
+
+				<!-- weapon_sniperrifle -->
+				<button id="COMPONENT_AT_SCOPE_LARGE" name="weapon_heavysniper"
+				class="component">Large Scope</button>
+
+				<!-- weapon_heavysniper weapon_heavysniper_mk2 -->
+				<button id="COMPONENT_AT_SCOPE_MAX" name=" weapon_sniperrifle"
+				class="component">Largest Scope</button>
+
+				<button id="COMPONENT_AT_MUZZLE_08" name="weapon_heavysniper_mk2 weapon_pumpshotgun_mk2"
+				class="component">Muzzle Brake</button>
+
+				<button id="COMPONENT_AT_SR_SUPP_03" name="weapon_pumpshotgun_mk2 weapon_heavysniper_mk2"
+				class="component">Suppressor</button>
+
+				<!-- <button id="COMPONENT_HEAVYSNIPER_MK2_CLIP_01" name="weapon_heavysniper_mk2" class="component">Default Clip</button> -->
+				<button id="COMPONENT_HEAVYSNIPER_MK2_CLIP_02" name="weapon_heavysniper_mk2" class="component">Extended Clip</button>
+				<button id="COMPONENT_HEAVYSNIPER_MK2_CLIP_ARMORPIERCING" name="weapon_heavysniper_mk2" class="component">Armor Piercing Rounds Clip</button>
+				<button id="COMPONENT_HEAVYSNIPER_MK2_CLIP_EXPLOSIVE" name="weapon_heavysniper_mk2" class="component">Explosive Rounds Clip</button>
+				<button id="COMPONENT_HEAVYSNIPER_MK2_CLIP_FMJ" name="weapon_heavysniper_mk2" class="component">Full Metal Jacket Rounds Clip</button>
+				<button id="COMPONENT_HEAVYSNIPER_MK2_CLIP_INCENDIARY" name="weapon_heavysniper_mk2" class="component">Incendiary Rounds Clip</button>
+				<!-- <button id="COMPONENT_AT_SR_BARREL_01" name="weapon_heavysniper_mk2" class="component">Default Barrel</button> -->
+				<button id="COMPONENT_AT_SR_BARREL_02" name="weapon_heavysniper_mk2" class="component">Heavy Barrel</button>
+
+				<button id="COMPONENT_AT_SCOPE_LARGE_MK2" name="weapon_heavysniper_mk2" class="component">Large Scope</button>
+				<button id="COMPONENT_AT_SCOPE_NV" name="weapon_heavysniper_mk2" class="component">Night Vision Scope</button>
+				<button id="COMPONENT_AT_SCOPE_THERMAL" name="weapon_heavysniper_mk2" class="component">Thermal Scope</button>
+				<button id="COMPONENT_AT_MUZZLE_09" name="weapon_heavysniper_mk2" class="component">Bell-End Muzzle Brake</button>
+
+				<button id="COMPONENT_HEAVYSNIPER_MK2_CAMO"    name="weapon_heavysniper_mk2" class="component">Digital Finish</button>
+				<button id="COMPONENT_HEAVYSNIPER_MK2_CAMO_02" name="weapon_heavysniper_mk2" class="component">Brushstroke Finish</button>
+				<button id="COMPONENT_HEAVYSNIPER_MK2_CAMO_03" name="weapon_heavysniper_mk2" class="component">Woodland Finish</button>
+				<button id="COMPONENT_HEAVYSNIPER_MK2_CAMO_04" name="weapon_heavysniper_mk2" class="component">Skull Finish</button>
+				<button id="COMPONENT_HEAVYSNIPER_MK2_CAMO_05" name="weapon_heavysniper_mk2" class="component">Sessanta Nove Finish</button>
+				<button id="COMPONENT_HEAVYSNIPER_MK2_CAMO_06" name="weapon_heavysniper_mk2" class="component">Perseus Finish</button>
+				<button id="COMPONENT_HEAVYSNIPER_MK2_CAMO_07" name="weapon_heavysniper_mk2" class="component">Leopard Finish</button>
+				<button id="COMPONENT_HEAVYSNIPER_MK2_CAMO_08" name="weapon_heavysniper_mk2" class="component">Zebra Finish</button>
+				<button id="COMPONENT_HEAVYSNIPER_MK2_CAMO_09" name="weapon_heavysniper_mk2" class="component">Geometric Finish</button>
+				<button id="COMPONENT_HEAVYSNIPER_MK2_CAMO_10" name="weapon_heavysniper_mk2" class="component">Boom! Finish</button>
+				<button id="COMPONENT_HEAVYSNIPER_MK2_CAMO_IND_01" name="weapon_heavysniper_mk2" class="component">Patriotic Finish</button>
+
+				<!-- <button id="COMPONENT_MARKSMANRIFLE_CLIP_01" name="weapon_marksmanrifle" class="component">Default Clip</button> -->
+				<button id="COMPONENT_MARKSMANRIFLE_CLIP_02" name="weapon_marksmanrifle" class="component">Extended Clip</button>
+				<button id="COMPONENT_MARKSMANRIFLE_VARMOD_LUXE" name="weapon_marksmanrifle" class="component">Yusuf Amir Luxury Finish</button>
+				<!-- <button id="COMPONENT_AT_SCOPE_LARGE_FIXED_ZOOM" name="weapon_marksmanrifle" class="component">Zoom Scope</button> -->
+
+				<!-- <button id="COMPONENT_MARKSMANRIFLE_MK2_CLIP_01" 		   name="weapon_marksmanrifle_mk2" class="component">Default Clip</button> -->
+				<button id="COMPONENT_MARKSMANRIFLE_MK2_CLIP_02" 		   name="weapon_marksmanrifle_mk2" class="component">Extended Clip</button>
+				<button id="COMPONENT_MARKSMANRIFLE_MK2_CLIP_ARMORPIERCING" name="weapon_marksmanrifle_mk2" class="component">Armor Piercing Rounds Clip</button>
+				<button id="COMPONENT_MARKSMANRIFLE_MK2_CLIP_FMJ" 		   name="weapon_marksmanrifle_mk2" class="component">Full Metal Jacket Rounds Clip</button>
+				<button id="COMPONENT_MARKSMANRIFLE_MK2_CLIP_INCENDIARY"  name="weapon_marksmanrifle_mk2" class="component">Incendiary Rounds Clip</button>
+				<button id="COMPONENT_MARKSMANRIFLE_MK2_CLIP_TRACER" 	   name="weapon_marksmanrifle_mk2" class="component">Tracer Rounds Clip</button>
+				<!-- <button id="COMPONENT_AT_MRFL_BARREL_01" name="weapon_marksmanrifle_mk2" class="component">Default Barrel</button> -->
+				<!-- <button id="COMPONENT_AT_SCOPE_LARGE_FIXED_ZOOM_MK2" name="weapon_marksmanrifle_mk2" class="component">Zoom Scope</button> -->
+				<button id="COMPONENT_MARKSMANRIFLE_MK2_CAMO" 	 name="weapon_marksmanrifle_mk2" class="component">Digital Finish</button>
+				<button id="COMPONENT_MARKSMANRIFLE_MK2_CAMO" 	 name="weapon_marksmanrifle_mk2" class="component">Digital Finish</button>
+				<button id="COMPONENT_MARKSMANRIFLE_MK2_CAMO_02" name="weapon_marksmanrifle_mk2" class="component">Brushstroke Finish</button>
+				<button id="COMPONENT_MARKSMANRIFLE_MK2_CAMO_03" name="weapon_marksmanrifle_mk2" class="component">Woodland Finish</button>
+				<button id="COMPONENT_MARKSMANRIFLE_MK2_CAMO_04" name="weapon_marksmanrifle_mk2" class="component">Skull Finish</button>
+				<button id="COMPONENT_MARKSMANRIFLE_MK2_CAMO_05" name="weapon_marksmanrifle_mk2" class="component">Sessanta Nove Finish</button>
+				<button id="COMPONENT_MARKSMANRIFLE_MK2_CAMO_06" name="weapon_marksmanrifle_mk2" class="component">Perseus Finish</button>
+				<button id="COMPONENT_MARKSMANRIFLE_MK2_CAMO_07" name="weapon_marksmanrifle_mk2" class="component">Leopard Finish</button>
+				<button id="COMPONENT_MARKSMANRIFLE_MK2_CAMO_08" name="weapon_marksmanrifle_mk2" class="component">Zebra Finish</button>
+				<button id="COMPONENT_MARKSMANRIFLE_MK2_CAMO_09" name="weapon_marksmanrifle_mk2" class="component">Geometric Finish</button>
+				<button id="COMPONENT_MARKSMANRIFLE_MK2_CAMO_10" name="weapon_marksmanrifle_mk2" class="component">Boom! Finish</button>
+				<button id="COMPONENT_MARKSMANRIFLE_MK2_CAMO_IND_01" name="weapon_marksmanrifle_mk2" class="component">Patriotic Finish</button>
+
+				<button id="COMPONENT_SNIPERRIFLE_VARMOD_LUXE" name="weapon_sniperrifle" class="component">Etched Wood Grip Finish</button>
+
+				<!-- <button id="COMPONENT_ASSAULTSHOTGUN_CLIP_01" name="weapon_assaultshotgun" class="component">Default Clip</button> -->
+				<button id="COMPONENT_ASSAULTSHOTGUN_CLIP_02" name="weapon_assaultshotgun" class="component">Drum Clip</button>
+
+				<!-- <button id="COMPONENT_HEAVYSHOTGUN_CLIP_01" name="weapon_heavyshotgun" class="component">Default Clip</button> -->
+				<button id="COMPONENT_HEAVYSHOTGUN_CLIP_02" name="weapon_heavyshotgun" class="component">Extended Clip</button>
+				<button id="COMPONENT_HEAVYSHOTGUN_CLIP_03" name="weapon_heavyshotgun" class="component">Drum Clip</button>
+
+				<button id="COMPONENT_AT_SR_SUPP" name="weapon_pumpshotgun" class="component">Suppressor</button>
+				<button id="COMPONENT_PUMPSHOTGUN_VARMOD_LOWRIDER" name="weapon_pumpshotgun" class="component">Yusuf Amir Luxury Finish</button>
+
+				<!-- <button id="COMPONENT_PUMPSHOTGUN_MK2_CLIP_01" name="weapon_pumpshotgun_mk2" class="component">Default Shells</button> -->
+				<button id="COMPONENT_PUMPSHOTGUN_MK2_CLIP_ARMORPIERCING" name="weapon_pumpshotgun_mk2" class="component">Armor Piercing Shells (Steel Buckshot)</button>
+				<button id="COMPONENT_PUMPSHOTGUN_MK2_CLIP_EXPLOSIVE" name="weapon_pumpshotgun_mk2" class="component">Explosive Shells (Slugs)</button>
+				<button id="COMPONENT_PUMPSHOTGUN_MK2_CLIP_HOLLOWPOINT" name="weapon_pumpshotgun_mk2" class="component">Hollow Point Shells (Flechette)</button>
+				<button id="COMPONENT_PUMPSHOTGUN_MK2_CLIP_INCENDIARY" name="weapon_pumpshotgun_mk2" class="component">Incendiary Shells (Dragon's Breath)</button>
+				<button id="COMPONENT_PUMPSHOTGUN_MK2_CAMO" name="weapon_pumpshotgun_mk2" class="component">Digital Finish</button>
+				<button id="COMPONENT_PUMPSHOTGUN_MK2_CAMO_02" name="weapon_pumpshotgun_mk2" class="component">Brushstroke Finish</button>
+				<button id="COMPONENT_PUMPSHOTGUN_MK2_CAMO_03" name="weapon_pumpshotgun_mk2" class="component">Woodland Finish</button>
+				<button id="COMPONENT_PUMPSHOTGUN_MK2_CAMO_04" name="weapon_pumpshotgun_mk2" class="component">Skull Finish</button>
+				<button id="COMPONENT_PUMPSHOTGUN_MK2_CAMO_05" name="weapon_pumpshotgun_mk2" class="component">Sessanta Nove Finish</button>
+				<button id="COMPONENT_PUMPSHOTGUN_MK2_CAMO_06" name="weapon_pumpshotgun_mk2" class="component">Perseus Finish</button>
+				<button id="COMPONENT_PUMPSHOTGUN_MK2_CAMO_07" name="weapon_pumpshotgun_mk2" class="component">Leopard Finish</button>
+				<button id="COMPONENT_PUMPSHOTGUN_MK2_CAMO_08" name="weapon_pumpshotgun_mk2" class="component">Zebra Finish</button>
+				<button id="COMPONENT_PUMPSHOTGUN_MK2_CAMO_09" name="weapon_pumpshotgun_mk2" class="component">Geometric Finish</button>
+				<button id="COMPONENT_PUMPSHOTGUN_MK2_CAMO_10" name="weapon_pumpshotgun_mk2" class="component">Boom! Finish</button>
+				<button id="COMPONENT_PUMPSHOTGUN_MK2_CAMO_IND_01" name="weapon_pumpshotgun_mk2" class="component">Patriotic Finish</button>
+
+				<button id="COMPONENT_SAWNOFFSHOTGUN_VARMOD_LUXE" name="weapon_sawnoffshotgun" class="component">Gilded Gun Metal Finish</button>
+
+				<!-- <button id="COMPONENT_GRENADELAUNCHER_CLIP_01" name="weapon_grenadelauncher" class="component">Default Clip</button> -->
+			</div>
+		</div>
+	</div>
+</body>
+</html>
