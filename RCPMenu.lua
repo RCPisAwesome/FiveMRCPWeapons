@@ -1,6 +1,11 @@
 ped = PlayerPedId()
 RegisterCommand('rcpweapons', function()
 	CreateThread(function()
+		if GetFollowPedCamViewMode() == 4 then
+			camviewint = GetFollowPedCamViewMode()
+			SetFollowPedCamViewMode(0)
+			camview = true
+		end
 		SendNUIMessage({showmenu = true, menuclick = true, showstats = true, damage = 0, speed = 0, capacity = 0, accuracy = 0, range = 0,
     					compdamage = 0, compspeed = 0, compcapacity = 0, compaccuracy = 0, comprange = 0})
 		SetNuiFocus(true, true)
@@ -95,6 +100,11 @@ RegisterNUICallback('close', function()
 
 	SetEntityCoords(ped,x,y,z-1000.0,false,false,false,false)
 	FreezeEntityPosition(ped,false)
+
+	if camview then
+		SetFollowPedCamViewMode(camviewint)
+		camview = false
+	end
 end)
 
 freeze = false
